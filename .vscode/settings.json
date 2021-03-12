@@ -66,5 +66,5 @@
   //     "query": "is:open mentions:${user}"
   //   }
   // ],
-  "git.enableSmartCommit": true,
+  //"git.enableSmartCommit": true,
 }
