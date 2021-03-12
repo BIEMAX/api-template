@@ -1,4 +1,4 @@
-# saipos-api
+# api-template
 
 # Instructions
 

@@ -1,5 +1,5 @@
 {
-  "name": "saipos-api",
+  "name": "api-template",
   "version": "1.0.0",
   "description": "# Instructions",
   "main": "app.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BIEMAX/saipos-api.git"
+    "url": "git+https://github.com/BIEMAX/api-template.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BIEMAX/saipos-api/issues"
+    "url": "https://github.com/BIEMAX/api-template/issues"
   },
-  "homepage": "https://github.com/BIEMAX/saipos-api#readme",
+  "homepage": "https://github.com/BIEMAX/api-template#readme",
   "dependencies": {
     "async": "^3.2.0",
     "dotenv": "^8.2.0",
