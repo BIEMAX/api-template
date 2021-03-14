@@ -48,3 +48,8 @@ https://www.npmjs.com/package/moment
   > Link: https://www.npmjs.com/package/moment
   >
   > Installation: `npm install moment --save`
+
+8. Mongoose (Object modeling tool)
+  > Link: https://www.npmjs.com/package/mongoose
+  >
+  > Installation: `npm install mongoose --save`
