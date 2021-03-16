@@ -1,26 +1,19 @@
-//#region Custom configurations packages
-
+// Custom configurations packages
 const express = require('express')
 const app = express()
-const config = require('./config/index')
+const config = require('./config/indexV1')
 const cors = require('cors')
 const moment = require('moment')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 
-//#endregion
-
-//#region Definitions/Custom settings/Middle wares
-
-//app.set('view engine', 'ejs')
+// Definitions/Custom settings/Middle wares
+app.set('view engine', 'ejs')
 app.use(morgan('dev'))
 app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
-// Public path
-app.use(express.static('public'))
-
-
+// Cors configuration
 app.use(cors);
 app.use(function (req, res, next) {
 
@@ -33,15 +26,22 @@ app.use(function (req, res, next) {
 
 });
 
+
+// Public path
+app.use(express.static('public'))
+
+// Routes/endpoints (each version will be a new line)
+require('./routes/indexV1')(app)
+
 // Error no unknown routes
 app.use(function (req, res) {
   res.status(404).json({
-    status: false,
+    // status: false,
     message: 'Endpoint not found. Contact the system administrator for more information;'
   })
 });
 
-// Custom error json
+// Error Handler/Custom error json
 app.use(function (err, req, res, next) {
   let customError = require('./libs/customError')
   let error = customError(err, next)
@@ -55,9 +55,6 @@ app.use(function (err, req, res, next) {
 });
 
 //#endregion 
-
-// Routes/endpoints (each version will be a new line)
-require('./routes/v1')(app)
 
 app.listen(config.api.port || 3000, function () {
   console.log('-------------------------------------------------------------------------------------------------')

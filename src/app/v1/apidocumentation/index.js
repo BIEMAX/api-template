@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const config = require('../../../config/index')
+const config = require('../../../config/indexV1')
 
 module.exports = () => {
   const swaggerUi = require('swagger-ui-express')
-  const swaggerJsonDocumentation = require('swagger-jsdoc')
+  const swaggerJsDocumentation = require('swagger-jsdoc')
   const swaggerDefinitions = require('../../../config/swagger-V1')
 
   const swaggerOptions = {
@@ -12,7 +12,7 @@ module.exports = () => {
     apis: swaggerDefinitions.apis
   }
 
-  const swaggerSpecification = swaggerJsonDocumentation(swaggerOptions)
+  const swaggerSpecification = swaggerJsDocumentation(swaggerOptions)
 
   const options = {
     customSiteTitle: config.api.applicationName,
@@ -23,7 +23,6 @@ module.exports = () => {
     swaggerOptions: {
       docExpansion: 'none',
       apisSorter: 'alpha',
-      //Ordenate the endpoints
       operationsSorter: (a, b) => {
         let methodsOrder = [
           'post',

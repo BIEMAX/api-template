@@ -1,7 +1,7 @@
 {
   "name": "api-template",
   "version": "1.0.0",
-  "description": "# Instructions",
+  "description": "API Template",
   "main": "app.js",
   "scripts": {
     "start": "node src/app.js",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/BIEMAX/api-template.git"
   },
-  "author": "",
+  "author": "Dionei Beilke Dos Santos",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/BIEMAX/api-template/issues"
@@ -28,7 +28,7 @@
     "moment": "^2.29.1",
     "mongoose": "^5.12.0",
     "morgan": "^1.10.0",
-    "swagger-jsdoc": "^7.0.0-rc.6",
+    "swagger-jsdoc": "^6.0.0",
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {

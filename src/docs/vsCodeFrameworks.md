@@ -33,13 +33,13 @@ https://www.npmjs.com/package/moment
 5. Swagger (API documentation)
   > Link: https://www.npmjs.com/package/swagger
   >
-  > Installation: `npm install --save swagger-ui-express`
+  > Installation: `npm install swagger-ui-express`
   >
-  > `npm install --save swagger-node-express` //Do not need this guy
+  > `npm install swagger-node-express` //Do not need this guy
   >
-  > `npm install --save swagger-jsdoc`
+  > `npm install swagger-jsdoc`
   >
-  > `npm install --save express-validator`
+  > `npm install express-validator`
 
 6. Express validatior (Validation for parameters)
   > Link: https://www.npmjs.com/package/express-validator
