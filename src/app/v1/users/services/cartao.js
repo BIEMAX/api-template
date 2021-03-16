@@ -1,34 +1,58 @@
 /**
  * @swagger
- * /cadastro/cartao:
+ * /users/cartao:
  *   post:
  *     summary: "Solicitação da segunda via do cartão do beneficiário"
  *     operationId: postSegundaVia
  *     description: "Solicita a segunda via do cartão do beneficiário através do aplicativo."
  *     deprecated: true
  *     tags:
- *      - Cadastro
+ *      - Users
  *     security:
- *       - Bearer: []
+ *       - Apikey: []
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/CallBackSegundaViaCartao'
+ *             type: object
+ *             require:
+ *               -cpf
+ *               -userName
+ *               -userId
+ *             properties:
+ *               cpf:
+ *                 type: string
+ *                 description: "CPF of user"
+ *                 example: "12345678912"
+ *               userName:
+ *                 type: string
+ *                 description: "User name"
+ *                 example: "Dionei Beilke dos Santos"
+ *               userId:
+ *                 type: string
+ *                 description: "User id"
+ *                 example: "12"
  *     responses:
  *       200:
- *         description: Cartao Solicitado
+ *         description: "Card requested"
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/CallBackSegundaViaCartaoResultado'
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   description: "teste"
+ *                   type: boolean
+ *                 message:
+ *                   description: "teste 2"
+ *                   type: string
  *       400:
- *         description: Parâmetros inválidos
+ *         description: "Invalid parameters"
  *       401:
- *         description: Não Autorizado
+ *         description: "Not authorized"
  *       404:
- *         description: Beneficiário não existe
+ *         description: "Register doesn't exist"
  */
 
 const async = require('async')
