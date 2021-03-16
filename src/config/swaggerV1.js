@@ -1,12 +1,12 @@
-const config = require('./indexV1')
+const config = require('.')
 
 module.exports = {
   openapi: '3.0.0', //swagger version, do not change
   info: {
-    title: config.api.applicationName + ' (' + config.api.environment + ')',
+    title: config.api.applicationName + '-V1 (' + config.api.environment + ')',
     version: config.api.version,
     description: config.api.environment.toUpperCase(),
-    termsOfService: 'https://localhost:3000/termos_usu',
+    termsOfService: 'https://localhost:3000/v1/users/userterms',
     contact: {
       email: 'help@dionei.com.br'
     }
@@ -16,7 +16,10 @@ module.exports = {
       url: '/v1'
     }
   ],
-  apis: ['src/**/*.js', 'src/**/*.yml'],
+  apis: [
+    'src/app/v1/**/*.js',
+    // 'src/**/*.yml'
+  ],
   tags: [
     {
       name: 'user',

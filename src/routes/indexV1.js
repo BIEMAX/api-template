@@ -7,6 +7,6 @@
 module.exports = (app) => {
   app.use('/v1/users', require('../app/v1/users')(app))
 
-  app.use('/v1/api', require('../app/v1/apidocumentation')(app))
-  app.use('/v1', require('../app/v1/apidocumentation')(app)) //main route
+  app.use('/v1/api', require('../app/v1/apidoc')(app))
+  app.use('/v1', require('../app/v1/apidoc')(app)) //main route
 }

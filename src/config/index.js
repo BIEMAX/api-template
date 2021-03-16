@@ -13,7 +13,7 @@ module.exports = {
   api: {
     applicationName: 'API Template',
     version: '1.0.0',
-    port: process.env.PORT || '3000',
+    port: process.env.PORT || '3001',
     environment: process.env.ENVIRONMENT || 'Development',
   }
 }

@@ -1,7 +1,8 @@
 // Custom configurations packages
+require('dotenv').config()
 const express = require('express')
 const app = express()
-const config = require('./config/indexV1')
+const config = require('./config')
 const cors = require('cors')
 const moment = require('moment')
 const morgan = require('morgan')
@@ -14,16 +15,14 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
 // Cors configuration
-app.use(cors);
+app.use(cors());
 app.use(function (req, res, next) {
-
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
-  res.setHeader('Access-Control-Allow-Credentials', true)
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
 
   next();
-
 });
 
 
@@ -54,12 +53,12 @@ app.use(function (err, req, res, next) {
 
 });
 
-//#endregion 
+// app.enable('trust proxy')
 
 app.listen(config.api.port || 3000, function () {
   console.log('-------------------------------------------------------------------------------------------------')
   console.log(`API server started in port ${config.api.port || 3000} in ${Date()}`)
   console.log('-------------------------------------------------------------------------------------------------')
-});
+})
 
 module.exports = app

@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const config = require('../../../config/indexV1')
+const config = require('../../../config/index')
 
 module.exports = () => {
   const swaggerUi = require('swagger-ui-express')
   const swaggerJsDocumentation = require('swagger-jsdoc')
-  const swaggerDefinitions = require('../../../config/swagger-V1')
+  const swaggerDefinitions = require('../../../config/swaggerV1')
 
   const swaggerOptions = {
     definition: swaggerDefinitions,
