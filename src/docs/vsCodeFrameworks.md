@@ -38,6 +38,8 @@ https://www.npmjs.com/package/moment
   > `npm install --save swagger-node-express` //Do not need this guy
   >
   > `npm install --save swagger-jsdoc`
+  >
+  > `npm install --save express-validator`
 
 6. Express validatior (Validation for parameters)
   > Link: https://www.npmjs.com/package/express-validator
