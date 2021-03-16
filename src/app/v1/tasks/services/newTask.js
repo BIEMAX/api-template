@@ -54,6 +54,25 @@
  *       404:
  *         description: "Register doesn't exist"
  */
-module.exports = (req, res, next) => {
 
+const async = require('async')
+const newTask = require('../modules/newTask')
+
+module.exports = (req, res, next) => {
+  async(
+    [
+      (done) => {
+        newTask(req.body)
+          .then((data) => {
+            return res.status(200).json(data)
+          })
+          .catch((err) => {
+            done(err)
+          })
+      }
+    ],
+    (err) => {
+      next(err)
+    }
+  )
 }

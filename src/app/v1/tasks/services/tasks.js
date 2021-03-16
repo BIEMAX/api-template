@@ -1,38 +1,28 @@
 /**
  * @swagger
- * /users/cartao:
- *   post:
- *     summary: "Solicitação da segunda via do cartão do beneficiário"
- *     operationId: postSegundaVia
- *     description: "Solicita a segunda via do cartão do beneficiário através do aplicativo."
- *     deprecated: true
+ * /tasks/tasks:
+ *   get:
+ *     summary: "Get list of all tasks"
+ *     operationId: tasks
+ *     description: "Get list of all tasks"
+ *     deprecated: false
  *     tags:
- *      - Users
+ *      - Tasks
  *     security:
- *       - Bearer: []
+ *       - Apikey: []
  *     requestBody:
- *       required: true
+ *       required: false
  *       content:
  *         application/json:
  *           schema:
  *             type: object
  *             require:
- *               -cpf
- *               -userName
- *               -userId
+ *               -taskTitle
  *             properties:
- *               cpf:
+ *               taskTitle:
  *                 type: string
- *                 description: "CPF of user"
- *                 example: "12345678912"
- *               userName:
- *                 type: string
- *                 description: "User name"
- *                 example: "Dionei Beilke dos Santos"
- *               userId:
- *                 type: string
- *                 description: "User id"
- *                 example: "12"
+ *                 description: "Title of the task to find"
+ *                 example: "SQL"
  *     responses:
  *       200:
  *         description: "Card requested"
@@ -56,23 +46,23 @@
  */
 
 const async = require('async')
-const cartao = require('../modules/cartao')
+const newTask = require('../modules/newTask')
 
 module.exports = (req, res, next) => {
-  async.waterfall(
+  async(
     [
       (done) => {
-        cartao(req.body)
+        newTask(req.body)
           .then((data) => {
             return res.status(200).json(data)
           })
           .catch((err) => {
             done(err)
           })
-      },
+      }
     ],
     (err) => {
       next(err)
-    },
+    }
   )
 }
