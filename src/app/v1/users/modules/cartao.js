@@ -1,17 +1,17 @@
 'use strict'
 
-const monitorNewRelic = require('../../../../../lib/noticeErrorNewRelic')
-const asyncCust = require('../../../../../lib/waterfall')
-const requestProtheus = require('../../../../../lib/requestProtheus')
-const log = require('../../../../../lib/log')
+// const monitorNewRelic = require('../../../../../lib/noticeErrorNewRelic')
+const asyncCust = require('../../../../libs/waterfall')
+// const requestProtheus = require('../../../../../lib/requestProtheus')
+// const log = require('../../../../../lib/log')
 const async = require('async')
 
-const dbConfig = require('../../../../../config/dbconfig')
-const oracledb = require('oracledb')
-oracledb.outFormat = oracledb.OBJECT
+// const dbConfig = require('../../../../../config/dbconfig')
+// const oracledb = require('oracledb')
+// oracledb.outFormat = oracledb.OBJECT
 
-const sqlBA1 = require('../sql/buscarUsuario')
-const sqlBED = require('../sql/buscarDadosCartao')
+// const sqlBA1 = require('../sql/buscarUsuario')
+// const sqlBED = require('../sql/buscarDadosCartao')
 
 module.exports = (params) => {
   return new Promise((resolve, reject) => {

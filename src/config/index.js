@@ -11,7 +11,8 @@ module.exports = {
     server: process.env.PASSWORD,
   },
   api: {
+    applicationName: 'API Template',
     port: process.env.PORT || '3000',
-    environment: process.env.ENVIRONMENT || 'Development'
+    environment: process.env.ENVIRONMENT || 'Development',
   }
 }

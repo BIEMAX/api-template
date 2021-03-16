@@ -55,3 +55,23 @@ https://www.npmjs.com/package/moment
   > Link: https://www.npmjs.com/package/mongoose
   >
   > Installation: `npm install mongoose --save`
+
+9. Cors policy
+  > Link: https://www.npmjs.com/package/cors
+  >
+  > Installation: `npm install cors`
+
+10. Moment (format and libs for datetimes)
+  > Link: https://www.npmjs.com/package/moment
+  >
+  > Installation: `npm install moment`
+
+11. Morgan (API middleware)
+  > Link: https://www.npmjs.com/package/morgan
+  >
+  > Installation: `npm install morgan`
+
+12. Body Parser (API middleware body parser to json)
+  > Link: https://www.npmjs.com/package/body-parser
+  >
+  > Installation: `npm install body-parser`

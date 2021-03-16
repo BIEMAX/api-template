@@ -31,7 +31,6 @@
  *         description: Beneficiário não existe
  */
 
-const monitorNewRelic = require('../../../../../lib/noticeErrorNewRelic')
 const async = require('async')
 const cartao = require('../modules/cartao')
 
@@ -44,7 +43,6 @@ module.exports = (req, res, next) => {
             return res.status(200).json(data)
           })
           .catch((err) => {
-            monitorNewRelic(new Error(err), null, null, req.body)
             done(err)
           })
       },
