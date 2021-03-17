@@ -1,7 +1,7 @@
 /**
  * @swagger
  * /tasks/tasks:
- *   get:
+ *   post:
  *     summary: "Get list of all tasks"
  *     operationId: tasks
  *     description: "Get list of all tasks"
@@ -46,13 +46,13 @@
  */
 
 const async = require('async')
-const newTask = require('../modules/newTask')
+const getAllTasks = require('../modules/tasks')
 
 module.exports = (req, res, next) => {
-  async(
+  async.waterfall(
     [
       (done) => {
-        newTask(req.body)
+        getAllTasks(req.body)
           .then((data) => {
             return res.status(200).json(data)
           })

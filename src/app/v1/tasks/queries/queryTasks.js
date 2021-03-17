@@ -2,5 +2,7 @@ module.exports = `
 SELECT
   *
 FROM
-  TASKS
+  tasks
+WHERE
+  title like '%' || coalesce(?, '') || '%'
 `

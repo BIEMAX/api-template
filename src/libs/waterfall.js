@@ -20,15 +20,14 @@ module.exports = (tasks, callback) => {
       else {
         return (...params) => {
           try {
-            tasks(...params)
+            task(...params)
           }
           catch (err) {
             params[params.length - 1](err)
           }
         }
       }
-    }
-  )
+    })
 
   waterfall(tryTasks, callback)
 }

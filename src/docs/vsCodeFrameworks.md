@@ -75,3 +75,8 @@ https://www.npmjs.com/package/moment
   > Link: https://www.npmjs.com/package/body-parser
   >
   > Installation: `npm install body-parser`
+
+12. MySQL
+  > Link: https://www.npmjs.com/package/mysql
+  >
+  > Installation: `npm install mysql`

@@ -27,7 +27,7 @@
       ],
       "program": "${workspaceFolder}/src/app.js",
       "cwd": "${workspaceFolder}",
-      "stopOnEntry": true
+      "stopOnEntry": false //If define true, when start debug, the code will stop at the app.js
     }
   ]
 }
