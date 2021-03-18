@@ -19,6 +19,7 @@
  *             require:
  *               -taskTitle
  *               -taskDescription
+ *               -userName
  *               -userEmail
  *             properties:
  *               taskTitle:
@@ -29,6 +30,10 @@
  *                 type: string
  *                 description: "Tasks description"
  *                 example: "Need to do 5 steps before start this task"
+ *               userName:
+ *                 type: string
+ *                 description: "User name"
+ *                 example: "Dionei Beilke Dos Santos"
  *               userEmail:
  *                 type: string
  *                 description: "User mail"
@@ -59,7 +64,7 @@ const async = require('async')
 const newTask = require('../modules/newTask')
 
 module.exports = (req, res, next) => {
-  async(
+  async.waterfall(
     [
       (done) => {
         newTask(req.body)

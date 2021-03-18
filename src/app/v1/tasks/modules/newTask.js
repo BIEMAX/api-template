@@ -1,18 +1,34 @@
 const asyncWaterfall = require('../../../../libs/waterfall')
-// const mysql = require('../../../../libs/mySqlConnection')
+const mysql = require('../../../../libs/mySqlConnection')
+
+const sqlInsertNewTask = require('../queries/insertNewTask')
 
 module.exports = (params) => {
   return new Promise((resolve, reject) => {
     asyncWaterfall(
       [
         (done) => {
-          // mysql('select * from tasks', null)
-          //   .then((data) => {
-          //     resolve(data)
-          //   })
-          //   .catch((err) => {
-          //     done(err)
-          //   })
+          let bindVars = {
+            //Title
+            title: params.taskTitle != undefined && params.taskTitle != null ? new String(params.taskTitle).trim() : '',
+            //Description
+            description: params.taskDescription != undefined && params.taskDescription != null ? new String(params.taskDescription).trim() : '',
+            //UserName
+            userName: params.userName != undefined && params.userName != null ? new String(params.userName).trim() : '',
+            //UserMail
+            userEmail: params.userEmail != undefined && params.userEmail != null ? new String(params.userEmail).trim() : '',
+          }
+          mysql(sqlInsertNewTask, bindVars)
+            .then((data) => {
+              // let payload = {
+              //   status: true,
+              //   message: "Row inserted with success"
+              // }
+              resolve(data)
+            })
+            .catch((err) => {
+              done(err)
+            })
         }
       ],
       (err) => {

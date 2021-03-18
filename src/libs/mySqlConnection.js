@@ -35,18 +35,18 @@ module.exports = (sql, params) => {
         },
         (conn, done) => {
           //Definitions to run sql
-          let bindVars = {
-            sql: sql,
-            timeout: 40000, //40s
-            values: params
-          }
-          conn.query(bindVars, function (err, result) {
+          // let bindVars = {
+          //   sql: sql,
+          //   timeout: 40000, //40s
+          //   values: params
+          // }
+          conn.query(sql, params, function (err, result) {
             if (err) done(err)
             else {
-              conn.end();
+              conn.release()
               let payload = {
                 status: true,
-                message: "Sql executed with success",
+                message: `Sql executed with success. Rows affected: '${result.affectedRows}'`,
                 data: {
                   rows: result
                 }
