@@ -76,7 +76,12 @@ https://www.npmjs.com/package/moment
   >
   > Installation: `npm install body-parser`
 
-12. MySQL
+13. Axios (HTML tags reader)
+  > Link: https://www.npmjs.com/package/axios
+  >
+  > Installation: `npm install axios`
+
+14. MySQL
   > Link: https://www.npmjs.com/package/mysql
   >
   > Installation: `npm install mysql`
