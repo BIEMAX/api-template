@@ -48,12 +48,16 @@ app.use(function (err, req, res, next) {
   res.status(error.status).json({
     status: false,
     message: error.message,
+    code: error.code,
+    callType: error.syscall,
+    lineError: error.lineError,
     timestamp: moment().format('YYYY-MM-DD HH:MM:SS:00-03:00')
   })
 
 });
 
 // app.enable('trust proxy')
+// TODO: Create workaround to error: listen EADDRINUSE: address already in use :::3000. Change the port maybe? Increase automatically.
 
 app.listen(config.api.port || 3000, function () {
   console.log('-------------------------------------------------------------------------------------------------')

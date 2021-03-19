@@ -38,26 +38,49 @@ module.exports = function (err) {
 				pathMsg = pathMsg.split(/(?=[A-Z])/).join(' ')
 				if (kind === ValidationErrors.REQUIRED) {
 					error.details[errName] = {
-						message: ('Please, informe um valor válido para %s.', pathMsg),
+						message: ('Please, enter a valid value for %s.', pathMsg),
 					}
 				} else if (kind === ValidationErrors.ENUM) {
 					error.details[errName] = {
-						message: ('Por favor, informe um valor válido para %s.', pathMsg),
+						message: ('Please, enter a valid value for %s.', pathMsg),
 						enum: err.errors[errName].properties.enumValues,
 					}
 				} else if (kind === ValidationErrors.USER_DEFINED) {
 					error.details[errName] = {
-						message: err.errors[errName].properties.msg ? err.errors[errName].properties.msg : ('Por favor, informe um valor válido para %s.', pathMsg),
+						message: err.errors[errName].properties.msg ? err.errors[errName].properties.msg : ('Please, enter a valid value for %s.', pathMsg),
 					}
 				} else {
 					error.details[errName] = {
-						message: ('Por favor, informe um valor válido para %s.', pathMsg),
+						message: ('Please, enter a valid value for %s.', pathMsg),
 						properties: err.errors[errName].properties,
 					}
 				}
 			}
 		} else {
+
+			//Lines of stack trace (to get the line error in code)
+			let stackTraceArray = err.stack.toString().trim().split('\n')
+
+			let startPosition = 2;
+
+			let origemErro = '';
+
+			do {
+				//Get the last line in error tree
+				origemErro = stackTraceArray[startPosition]
+
+				startPosition++;
+
+				if (!origemErro.trim().startsWith('at')) {
+					origemErro = ''
+				}
+			}
+			while (origemErro == '' && startPosition <= stackTraceArray.length);
+
 			error.message = err.message
+			error.code = err.code
+			error.callType = err.syscall
+			error.lineError = origemErro.trim().replace('at', '')
 		}
 	}
 

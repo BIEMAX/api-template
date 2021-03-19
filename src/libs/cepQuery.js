@@ -12,20 +12,24 @@ const async = require('async')
  * 
  * @param {*} cepToFind 
  * @returns 
+ * @example const cepQuery = require('./libs/cepQuery')('93125-430')
  */
-module.exports = (cep) => {
+module.exports = async cep => {
   return new Promise((resolve, reject) => {
     async.waterfall(
       [
-        async (done) => {
-          if (!cep) return new Error('CEP cannot be null')
-          else if (cep.trim().length < 8) return new Error('CEP have to be only 8 numbers or 9 (with hyphen)')
+        (done) => {
+          if (!cep) return reject('CEP cannot be null')
+          else if (cep.trim().length < 8) reject('CEP have to be only 8 numbers or 9 (with hyphen)')
           else {
             const url = 'https://www.google.com.br/maps/search/' + cep.replace(/-/g, ""); //Replace all ocurrences
 
-            await axios(url)
+            reject('dionei teste de linha')
+
+            axios(url)
               .then(async response => {
-                const html = await response.data;
+                // await new Promise(res => setTimeout(res, 5000))
+                const html = response.data;
                 const addressInfo = html.split('\"' + cep)[1].replace(',', '').split('",null')[0]
 
                 if (addressInfo) {
@@ -44,9 +48,12 @@ module.exports = (cep) => {
                 }
               })
               .catch(err =>
-                done(err)
+                reject(err)
               )
           }
+        },
+        (dados, done) => {
+
         }
       ],
       (err) => {
