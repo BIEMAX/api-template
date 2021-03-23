@@ -33,7 +33,7 @@ module.exports = async cep => {
                 const addressInfo = html.split('\"' + cep)[1].replace(',', '').split('",null')[0]
 
                 if (addressInfo) {
-                  let payLoad = {
+                  let payload = {
                     status: true,
                     message: "Success to get the address",
                     data: {
@@ -44,7 +44,7 @@ module.exports = async cep => {
                       state: addressInfo.split('-')[2].replace(/ /g, ''),
                     }
                   }
-                  resolve(payLoad)
+                  resolve(payload)
                 }
               })
               .catch(err =>

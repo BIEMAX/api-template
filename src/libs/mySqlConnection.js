@@ -6,7 +6,7 @@ const async = require('async')
  * Executed SQL command on MySQL databases
  * @param {String} sql String containing sql to execute
  * @param {Object} params Array with parameters to use in query ([param1, param2, param3])
- * @returns Array of objects
+ * @returns Object
  */
 module.exports = (sql, params) => {
   return new Promise((resolve, reject) => {
@@ -14,7 +14,7 @@ module.exports = (sql, params) => {
       [
         (done) => {
           if (config.database.type.toUpperCase().trim() != "MYSQL") {
-            done(new Error('Currently, only MySql is supported with this api'))
+            done(new Error('MySQL is not defined as default database to connection'))
           }
           else done(null)
         },

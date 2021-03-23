@@ -22,6 +22,10 @@ module.exports = {
      */
     name: process.env.NAME,
     /**
+     * Connection string (used in Oracle)
+     */
+    connectionString: process.env.CONNECTION_STRING,
+    /**
      * Type of server (Can be SQL, MySQL, MongoDB, CosmosDB, Oracle)
      */
     type: process.env.TYPE || "MYSQL",
