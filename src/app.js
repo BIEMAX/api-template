@@ -56,13 +56,10 @@ app.use(function (err, req, res, next) {
 
 });
 
-// app.enable('trust proxy')
-// TODO: Create workaround to error: listen EADDRINUSE: address already in use :::3000. Change the port maybe? Increase automatically.
-
 app
   .listen(config.api.port || 3000, function () {
     console.log('-------------------------------------------------------------------------------------------------')
-    console.log(`API server started in port ${config.api.port || 3000} in ${Date()}`)
+    console.log(`\u001b[${32}mAPI server started in port ${config.api.port || 3000} in ${Date()} \u001b[0m`)
     console.log('-------------------------------------------------------------------------------------------------')
   })
   .on('error', function (error) {

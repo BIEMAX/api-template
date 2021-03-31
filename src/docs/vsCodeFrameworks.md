@@ -85,3 +85,8 @@ https://www.npmjs.com/package/moment
   > Link: https://www.npmjs.com/package/mysql
   >
   > Installation: `npm install mysql`
+
+15. Passport JWT Authentication
+  > Link: https://tableless.com.br/autenticar-usuarios-com-jwt-e-passport/
+  >
+  > Installation: `npm install passport passport-jwt jwt-simple --save`
