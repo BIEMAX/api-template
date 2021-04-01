@@ -7,6 +7,7 @@ const cors = require('cors')
 const moment = require('moment')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const { initialize } = require('./libs/authentication')
 
 // Definitions/Custom settings/Middle wares
 app.set('view engine', 'ejs')
@@ -24,6 +25,9 @@ app.use(function (req, res, next) {
 
   next();
 });
+
+//Passport authentication with JWT
+app.use(initialize())
 
 
 // Public path

@@ -90,3 +90,8 @@ https://www.npmjs.com/package/moment
   > Link: https://tableless.com.br/autenticar-usuarios-com-jwt-e-passport/
   >
   > Installation: `npm install passport passport-jwt jwt-simple --save`
+
+16. Passport Header ApiKey
+  > Link: https://www.npmjs.com/package/passport-headerapikey
+  >
+  > Installation: `npm install passport-headerapikey`
