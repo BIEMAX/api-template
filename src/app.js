@@ -27,7 +27,8 @@ app.use(function (req, res, next) {
 });
 
 //Passport authentication with JWT
-app.use(initialize())
+//TODO: End the implementation of JWT Passport.
+//app.use(initialize())
 
 
 // Public path

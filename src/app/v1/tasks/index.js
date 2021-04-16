@@ -5,6 +5,6 @@ const { isAPIKeyAuthenticate } = require('../../../libs/authentication')
 module.exports = () => {
   router.post('/new', isAPIKeyAuthenticate(''), require('./services/newTask'))
   router.post('/tasks', require('./services/tasks'))
-
+  router.get('/tasks/todo', require('./services/tasksTodo'))
   return router
 }
