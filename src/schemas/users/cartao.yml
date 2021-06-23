@@ -1,0 +1,51 @@
+components:
+  schemas:
+    incluirRespostas:
+      type: object
+      properties:
+        beneficiario:
+          description: "Contém informações do beneficiário"
+          type: object
+          properties:
+            nome:
+              description: "Nome do beneficiário"
+              type: string
+              example: "DIONEI BEILKE DOS SANTOS"
+            peso:
+              description: "Peso do beneficiário em quilos"
+              type: double
+              example: 94.5
+            altura:
+              description: "Altura do beneficiário"
+              type: double
+              example: 1.75
+            medico:
+              description: "Nome do médico"
+              type: string
+              example: "Guilherme Undercontrol"
+            crmMedico:
+              description: "CRM do médico"
+              type: string
+              example: "123456789"
+            medicoAvaliador:
+              description: "Determina se precisará de um apoio de um médico para preencher a DS"
+              type: string
+              example: "0"
+        respostas:
+          description: "Respostas da entrevista qualificada"
+          type: array
+          items:
+            type: object
+            properties:
+              idPergunta:
+                description: "ID da pergunta respondida"
+                type: string
+                example: "0001"
+              resposta:
+                description: "Respostas (0 para não e 1 para sim)"
+                type: string
+                example: "0"
+              observacao:
+                description: "Observação do beneficiário informado durante o preenchimento da DS"
+                type: string
+                example: "Clavícula trincada em 3 lugares, menisco de ambos joelhos rompidos"

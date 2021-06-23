@@ -18,7 +18,7 @@ module.exports = {
   ],
   apis: [
     'src/app/v1/**/*.js',
-    // 'src/**/*.yml'
+    // 'src/**/*.yml' //Diretório de schemas
   ],
   tags: [
     {

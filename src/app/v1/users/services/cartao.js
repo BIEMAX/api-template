@@ -15,24 +15,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             require:
- *               -cpf
- *               -userName
- *               -userId
- *             properties:
- *               cpf:
- *                 type: string
- *                 description: "CPF of user"
- *                 example: "12345678912"
- *               userName:
- *                 type: string
- *                 description: "User name"
- *                 example: "Dionei Beilke dos Santos"
- *               userId:
- *                 type: string
- *                 description: "User id"
- *                 example: "12"
+ *             $ref: '#/components/schemas/incluirRespostas'
  *     responses:
  *       200:
  *         description: "Card requested"
