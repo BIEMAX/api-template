@@ -5,7 +5,7 @@ const config = require('../../../config/index')
 module.exports = () => {
   const swaggerUi = require('swagger-ui-express')
   const swaggerJsDocumentation = require('swagger-jsdoc')
-  const swaggerDefinitions = require('../../../config/swaggerV1')
+  const swaggerDefinitions = require('../../../config/v1/index')
 
   const swaggerOptions = {
     definition: swaggerDefinitions,

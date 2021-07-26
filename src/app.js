@@ -62,9 +62,9 @@ app.use(function (err, req, res, next) {
 });
 
 app
-  .listen(config.api.port || 3000, function () {
+  .listen(config.api.port, function () {
     console.log('-------------------------------------------------------------------------------------------------')
-    console.log(`\u001b[${32}mAPI server started in port ${config.api.port || 3000} in ${Date()} \u001b[0m`)
+    console.log(`\u001b[${32}mAPI server started in port ${config.api.port} in ${Date()} \u001b[0m`)
     console.log('-------------------------------------------------------------------------------------------------')
   })
   .on('error', function (error) {
