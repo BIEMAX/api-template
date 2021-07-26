@@ -95,3 +95,8 @@ https://www.npmjs.com/package/moment
   > Link: https://www.npmjs.com/package/passport-headerapikey
   >
   > Installation: `npm install passport-headerapikey`
+
+17. i18n
+  > Link: https://www.npmjs.com/package/i18n
+  >
+  > Installation: `npm i i18n`

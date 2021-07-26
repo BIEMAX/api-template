@@ -35,6 +35,7 @@
 		"strings": true
 	},
 	"editor.largeFileOptimizations": false,
+	"editor.tabSize": 2,
 	"editor.formatOnPaste": true,
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
@@ -43,7 +44,6 @@
 	// "editor.autoIndent": "none",
 	// "editor.detectIndentation": true,
 	// "editor.insertSpaces": false,
-	"editor.tabSize": 2,
 	"diffEditor.ignoreTrimWhitespace": false,
 	"eslint.workingDirectories": [],
 	"recommendations": [

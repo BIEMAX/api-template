@@ -78,7 +78,7 @@ module.exports = {
     /**
      * Array of API KEY's (you can create a logic to authorized in database table
      * this keys).
-     * @type {Array}
+     * @type {Object}
      */
     apiKeys: [
       { customer: 'A', id: '0', key: 'YOUR_KEY_HERE', hasExpiration: false, dateExpiration: '2021-03-31', scopes: ['sales', 'users', 'tasks'] },

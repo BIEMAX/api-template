@@ -21,6 +21,13 @@ module.exports = () => {
     explorer: true,
     filter: true,
     swaggerOptions: {
+      //https://swagger.io/docs/open-source-tools/swagger-ui/usage/configuration/
+      displayRequestDuration: true,
+      //filter: false,
+      showExtensions: true,
+      showCommonExtensions: true,
+      displayOperationId: true,
+      //urls: [], // list of urls
       docExpansion: 'none',
       apisSorter: 'alpha',
       operationsSorter: (a, b) => {
@@ -34,8 +41,8 @@ module.exports = () => {
           'trace'
         ]
         let result =
-          methodsOrder.indexOf(a.get('method'))
-        methodsOrder.indexOf(b.get('method'))
+          methodsOrder.indexOf(a.get('method')) -
+          methodsOrder.indexOf(b.get('method'))
 
         if (result === 0) {
           result = a.get('path').localeCompare(b.get('path'))
