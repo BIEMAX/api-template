@@ -9,6 +9,9 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 //const { initialize } = require('./libs/authentication')
 
+const i18n = require('i18n')
+const configI18n = require('./config/i18n')
+
 // Definitions/Custom settings/Middle wares
 app.set('view engine', 'ejs')
 app.use(morgan('dev'))
@@ -30,6 +33,8 @@ app.use(function (req, res, next) {
 //TODO: End the implementation of JWT Passport.
 //app.use(initialize())
 
+i18n.configure(configI18n)
+i18n.setLocale(config.api.language)
 
 // Public path
 app.use(express.static('public'))
