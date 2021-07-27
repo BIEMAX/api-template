@@ -1,5 +1,11 @@
 {
-  "app": {
+  "init": {
+    "notFound": "Endpoint not found. Contact the system administrator for more information",
+    "serverStartSuccess": "API server started in port",
+    "serverStartError": "API server cannot be started by:",
+    "in": "in"
+  },
+  "api": {
     "v1": {
       "tasks": {},
       "users": {}
@@ -9,5 +15,6 @@
     "cepQuery": {
       "nullValue": "CEP cannot be null"
     }
-  }
+  },
+  "errors": {}
 }

@@ -35,6 +35,7 @@ app.use(function (req, res, next) {
 
 i18n.configure(configI18n)
 i18n.setLocale(config.api.language)
+const { translate } = require('./libs/library')
 
 // Public path
 app.use(express.static('public'))
@@ -46,7 +47,7 @@ require('./routes/indexV1')(app)
 app.use(function (req, res) {
   res.status(404).json({
     // status: false,
-    message: 'Endpoint not found. Contact the system administrator for more information;'
+    message: translate('init.notFound')
   })
 })
 
@@ -69,12 +70,12 @@ app.use(function (err, req, res, next) {
 app
   .listen(config.api.port, function () {
     console.log('-------------------------------------------------------------------------------------------------')
-    console.log(`\u001b[${32}mAPI server started in port ${config.api.port} in ${Date()} \u001b[0m`)
+    console.log(`\u001b[${32}m${translate('init.serverStartSuccess')} ${config.api.port} ${translate('init.in')} ${Date()} \u001b[0m`)
     console.log('-------------------------------------------------------------------------------------------------')
   })
   .on('error', function (error) {
     console.log('-------------------------------------------------------------------------------------------------')
-    console.log(`\u001b[${31}mAPI server cannot be started by: '${error}' in ${Date()} \u001b[0m`)
+    console.log(`\u001b[${31}m${translate('init.serverStartError')} '${error}' ${translate('init.in')} ${Date()} \u001b[0m`)
     console.log('-------------------------------------------------------------------------------------------------')
   })
 

@@ -1,5 +1,11 @@
 {
-  "app": {
+  "init": {
+    "notFound": "Ponto de chamada da API não localizado. Entre em contato com o administrador para maiores informações",
+    "serverStartSuccess": "Servidor da API iniciado na porta",
+    "serverStartError": "Servidor da API não pode iniciar devido ao erro:",
+    "in": "em"
+  },
+  "api": {
     "v1": {
       "tasks": {},
       "users": {}
@@ -9,5 +15,6 @@
     "cepQuery": {
       "nullValue": "CEP não pode ser vazio"
     }
-  }
+  },
+  "errors": {}
 }
