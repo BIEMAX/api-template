@@ -1,14 +1,10 @@
 {
   "workbench.startupEditor": "newUntitledFile",
-  "noUnusedLocals": true,
   "explorer.confirmDragAndDrop": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "window.titleBarStyle": "custom",
   "editor.multiCursorModifier": "ctrlCmd",
   "explorer.confirmDelete": false,
   "breadcrumbs.enabled": false,
-  "prettier.singleQuote": true,
-  "prettier.printWidth": 150,
   "extensions.ignoreRecommendations": false,
   "git.enableSmartCommit": true,
   "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
@@ -35,6 +31,8 @@
     "strings": true
   },
   "editor.largeFileOptimizations": false,
+  //Identation
+  "editor.detectIndentation": false,
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.formatOnPaste": true,
@@ -43,12 +41,7 @@
     "source.fixAll.eslint": true
   },
   // "editor.autoIndent": "none",
-  // "editor.detectIndentation": true,
   // "editor.insertSpaces": false,
   "diffEditor.ignoreTrimWhitespace": false,
   "eslint.workingDirectories": [],
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
-  ],
 }

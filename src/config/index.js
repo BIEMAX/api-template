@@ -13,7 +13,7 @@ module.exports = {
      * Server name (default localhost)
      * @type {String}
      */
-    server: process.env.SERVER || "localhost",
+    server: process.env.SERVER || 'localhost',
     /**
      * Username of database
      * @type {String}
@@ -37,7 +37,7 @@ module.exports = {
     /**
      * Type of server (Can be SQL, MySQL, MongoDB, CosmosDB, Oracle)
      */
-    type: process.env.TYPE || "MYSQL",
+    type: process.env.TYPE || 'MYSQL',
   },
   /**
    * Contains some definitions about API.

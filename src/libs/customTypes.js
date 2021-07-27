@@ -24,9 +24,6 @@
  * Enumerator with the days of the week
  */
 const EnumDays = {
-  /**
-   * Property : value
-   */
   'Monday': 1,
   'Tuesday': 2,
   'Wednesday': 3

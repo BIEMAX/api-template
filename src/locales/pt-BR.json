@@ -1,0 +1,13 @@
+{
+  "app": {
+    "v1": {
+      "tasks": {},
+      "users": {}
+    }
+  },
+  "lib": {
+    "cepQuery": {
+      "nullValue": "CEP não pode ser vazio"
+    }
+  }
+}
