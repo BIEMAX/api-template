@@ -15,7 +15,7 @@ module.exports = (sql, params, autoCommit = false) => {
     async.waterfall(
       [
         (done) => {
-          if (config.database.type.toUpperCase().trim() != "ORACLE") {
+          if (config.database.type.toUpperCase().trim() != 'ORACLE') {
             done(new Error('Oracle is not defined as default database to connection'))
           }
           else done(null)

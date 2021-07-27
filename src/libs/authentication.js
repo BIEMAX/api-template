@@ -9,7 +9,7 @@ const passport = require('passport')
  */
 const passportJWT = require('passport-jwt')
 const ExtractJwt = passportJWT.ExtractJwt
-const Strategy = passportJWT.Strategy;
+const Strategy = passportJWT.Strategy
 const HeaderAPIKeyStrategy = require('passport-headerapikey').HeaderAPIKeyStrategy
 
 /**
@@ -44,7 +44,7 @@ module.exports.initialize = () => {
       //   }
       // }
     }
-  );
+  )
 
   var strategyForApiKey = new HeaderAPIKeyStrategy(
     {
@@ -102,10 +102,10 @@ module.exports.initialize = () => {
         }
       }
     },
-  );
+  )
 
-  passport.use(strategyForBearerKey);
-  passport.use(strategyForApiKey);
+  passport.use(strategyForBearerKey)
+  passport.use(strategyForApiKey)
 
   return passport.initialize()
 }

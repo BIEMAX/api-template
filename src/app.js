@@ -7,7 +7,7 @@ const cors = require('cors')
 const moment = require('moment')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const { initialize } = require('./libs/authentication')
+//const { initialize } = require('./libs/authentication')
 
 // Definitions/Custom settings/Middle wares
 app.set('view engine', 'ejs')
@@ -16,15 +16,15 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
 // Cors configuration
-app.use(cors());
+app.use(cors())
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+  res.setHeader('Access-Control-Allow-Credentials', true)
 
-  next();
-});
+  next()
+})
 
 //Passport authentication with JWT
 //TODO: End the implementation of JWT Passport.
@@ -43,7 +43,7 @@ app.use(function (req, res) {
     // status: false,
     message: 'Endpoint not found. Contact the system administrator for more information;'
   })
-});
+})
 
 // Error Handler/Custom error json
 app.use(function (err, req, res, next) {
@@ -59,7 +59,7 @@ app.use(function (err, req, res, next) {
     timestamp: moment().format('YYYY-MM-DD HH:MM:SS:00-03:00')
   })
 
-});
+})
 
 app
   .listen(config.api.port, function () {

@@ -34,18 +34,12 @@ module.exports = {
     }
   ],
   schemes: [
-    "https",
-    "http"
+    'https',
+    'http'
   ],
   apis: [
     'src/app/v1/**/*.js',
     // 'src/**/*.yml' //Diretório de schemas
-  ],
-  tags: [
-    {
-      name: 'user',
-      description: 'API Template'
-    }
   ],
   consumes: ['application/json'],
   produces: ['application/json'],

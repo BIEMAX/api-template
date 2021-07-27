@@ -13,7 +13,7 @@ module.exports = (sql, params) => {
     async.waterfall(
       [
         (done) => {
-          if (config.database.type.toUpperCase().trim() != "MYSQL") {
+          if (config.database.type.toUpperCase().trim() != 'MYSQL') {
             done(new Error('MySQL is not defined as default database to connection'))
           }
           else done(null)
@@ -31,7 +31,7 @@ module.exports = (sql, params) => {
             else {
               done(null, conn)
             }
-          });
+          })
         },
         (conn, done) => {
           //Definitions to run sql

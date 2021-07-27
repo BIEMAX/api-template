@@ -27,9 +27,9 @@ const EnumDays = {
   /**
    * Property : value
    */
-  "Monday": 1,
-  "Tuesday": 2,
-  "Wednesday": 3
+  'Monday': 1,
+  'Tuesday': 2,
+  'Wednesday': 3
 }
 Object.freeze(EnumDays)
 
@@ -40,13 +40,13 @@ const LogType = {
   /**
    * Just to known if a service it's working or it's on.
    */
-  "Information": 0,
+  'Information': 0,
   /**
    * Notifiy if an automation it's on.
    */
-  "Notification": 1,
-  "Error": 2,
-  "Success": 3
+  'Notification': 1,
+  'Error': 2,
+  'Success': 3
 }
 
 module.exports = EnumDays
