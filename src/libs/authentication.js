@@ -1,4 +1,4 @@
-const config = require('../config/index')
+const { config, translate } = require('./library')
 
 /**
  * Allow to work with the following strategies to authentication: Basic & Digest, OpenID, OAuth, OAuth 2.0 and JWT.
@@ -24,25 +24,25 @@ module.exports.initialize = () => {
     },
     (payload, done) => {
       //TODO: Implement logic to validate bearer key's in database through queries.
-      return done(null, payload)
+      //return done(null, payload)
 
-      // //If allow, just say that it's ok
-      // if (config.security.canAllowNonSecureRequests) {
-      //   return done(null, { id: '-1', message: 'canAllowNonSecureRequests is defined as true' })
-      // }
-      // //If not check api-key in database, will check on array in config file
-      // else if (!config.security.shouldValidateApiKeyInDatabase) {
-      //   var user = config.security.apiKeys.filter(item => item.key === payload.id)
-      //   return done(null, { id: user.id });
-      // }
-      // else {
-      //   var user = users[payload.id] || null;
-      //   if (user) {
-      //     return done(null, { id: user.id });
-      //   } else {
-      //     return done(new Error("User not found"), null);
-      //   }
-      // }
+      //If allow, just say that it's ok
+      if (config.security.canAllowNonSecureRequests) {
+        return done(null, { id: '-1', message: translate('lib.auth.allow') })
+      }
+      //If not check api-key in database, will check on array in config file
+      else if (!config.security.shouldValidateApiKeyInDatabase) {
+        var user = config.security.apiKeys.filter(item => item.key === payload.id)
+        return done(null, user)
+      }
+      else {
+        var user = users[payload.id] || null
+        if (user) {
+          return done(null, { id: user.id })
+        } else {
+          return done(new Error(translate('lib.auth.notFound')), null)
+        }
+      }
     }
   )
 

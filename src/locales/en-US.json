@@ -12,6 +12,10 @@
     }
   },
   "lib": {
+    "auth": {
+      "allow": "canAllowNonSecureRequests is defined as true",
+      "notFound": "User not found"
+    },
     "cepQuery": {
       "nullValue": "CEP cannot be null"
     }

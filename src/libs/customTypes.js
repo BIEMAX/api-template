@@ -1,39 +1,25 @@
-// const mongoose = require('mongoose');
-
-// const Genders = Object.freeze({
-//   Male: 'male',
-//   Female: 'female',
-//   Other: 'other',
-// });
-
-// const PersonSchema = mongoose.Schema({
-//   name: String,
-//   gender: {
-//     type: String,
-//     enum: Object.values(Genders),
-//   },
-// });
-
-// Object.assign(PersonSchema.statics, {
-//   Genders,
-// });
-
-// module.exports = mongoose.model('person', PersonSchema);
+/**
+ * Enumerator with the  
+ */
+const EnumGenders = Object.freeze({
+  Male: 'male',
+  Female: 'female',
+  Other: 'other',
+})
 
 /**
  * Enumerator with the days of the week
  */
-const EnumDays = {
+const EnumDays = Object.freeze({
   'Monday': 1,
   'Tuesday': 2,
   'Wednesday': 3
-}
-Object.freeze(EnumDays)
+})
 
 /**
- * 
+ * Aaaaa
  */
-const LogType = {
+const EnumLogType = Object.freeze({
   /**
    * Just to known if a service it's working or it's on.
    */
@@ -44,6 +30,6 @@ const LogType = {
   'Notification': 1,
   'Error': 2,
   'Success': 3
-}
+})
 
-module.exports = EnumDays
+module.exports = { EnumDays, EnumLogType, EnumGenders }
