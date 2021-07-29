@@ -73,5 +73,18 @@ module.exports = {
       { customer: 'A', id: '0', key: 'YOUR_KEY_HERE', hasExpiration: false, dateExpiration: '2021-03-31', scopes: ['sales', 'users', 'tasks'] },
       { customer: 'B', id: '1', key: 'YOUR_KEY_HERE', hasExpiration: false, dateExpiration: '2021-03-31', scopes: ['sales', 'users', 'tasks'] }
     ]
+  },
+  /**
+   * Application Performance Management
+   */
+  apm: {
+    /**
+     * NewRelic APM
+     */
+    newRelic: {
+      showErrorOnTerminal: false,
+      apiKey: '',
+
+    }
   }
 }

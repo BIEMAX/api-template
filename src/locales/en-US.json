@@ -18,6 +18,34 @@
     },
     "cepQuery": {
       "nullValue": "CEP cannot be null"
+    },
+    "newRelic": {
+      "withoutInfo": "Without information about it"
+    }
+  },
+  "generic": {
+    "months": {
+      "jan": "january",
+      "fev": "february",
+      "mar": "march",
+      "apr": "april",
+      "may": "may",
+      "jun": "june",
+      "jul": "july",
+      "aug": "august",
+      "sep": "september",
+      "oct": "october",
+      "nov": "november",
+      "dec": "december"
+    },
+    "days": {
+      "mon": "monday",
+      "tue": "tuesday",
+      "wed": "wednesday",
+      "thu": "thursday",
+      "fri": "friday",
+      "sat": "saturday",
+      "sunday": "sunday"
     }
   },
   "errors": {}

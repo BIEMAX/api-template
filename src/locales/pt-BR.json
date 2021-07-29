@@ -14,6 +14,34 @@
   "lib": {
     "cepQuery": {
       "nullValue": "CEP não pode ser vazio"
+    },
+    "newRelic": {
+      "withoutInfo": "Sem informações sobre"
+    }
+  },
+  "generic": {
+    "months": {
+      "jan": "janeiro",
+      "fev": "fevereiro",
+      "mar": "março",
+      "apr": "abril",
+      "may": "maio",
+      "jun": "junho",
+      "jul": "julho",
+      "aug": "agosto",
+      "sep": "setembro",
+      "oct": "outubro",
+      "nov": "novembro",
+      "dec": "dezembro"
+    },
+    "days": {
+      "mon": "segunda-feira",
+      "tue": "terça-feira",
+      "wed": "quarta-feira",
+      "thu": "quinta-feira",
+      "fri": "sexta-feira",
+      "sat": "sábado",
+      "sunday": "domingo"
     }
   },
   "errors": {}

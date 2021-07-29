@@ -100,3 +100,8 @@ https://www.npmjs.com/package/moment
   > Link: https://www.npmjs.com/package/i18n
   >
   > Installation: `npm i i18n`
+
+18. New Relic API helth monitoring
+  > Link: https://www.npmjs.com/package/newrelic
+  >
+  > Installation: `npm install newrelic --save`
