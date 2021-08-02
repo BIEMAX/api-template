@@ -53,8 +53,11 @@ module.exports = () => {
     }
   }
 
-  router.use('/', swaggerUi.serve)
-  router.get('/', swaggerUi.setup(swaggerSpecification, options))
+  //TODO: #10 Check if this configuration can create other issues (during the requests)
+  //https://github.com/scottie1984/swagger-ui-express/issues/166
+  // router.use('/', swaggerUi.serve)
+  // router.get('/', swaggerUi.setup(swaggerSpecification, options))
+  router.use('/', swaggerUi.serveFiles(swaggerSpecification), swaggerUi.setup(swaggerSpecification, options))
 
   return router
 }

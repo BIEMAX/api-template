@@ -7,7 +7,7 @@
  *     description: "API Example"
  *     deprecated: true
  *     tags:
- *      - Users
+ *      - UsersAuth
  *     security:
  *       - Bearer: []
  *     requestBody:

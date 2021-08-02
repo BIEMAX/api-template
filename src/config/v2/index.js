@@ -1,5 +1,8 @@
 const config = require('../index')
 
+/**
+ * Contains swagger definitions (like servers, version, name, environment, routes).
+ */
 module.exports = {
   openapi: '3.0.0', //do not change
   info: {
@@ -39,13 +42,13 @@ module.exports = {
   ],
   apis: [
     'src/app/v2/**/*.js',
-    // 'src/**/*.yml' //Diretório de schemas
+    // 'src/**/*.yml' //Schemas directory
   ],
   consumes: ['application/json'],
   produces: ['application/json'],
   tags: [
     {
-      name: 'Users', //endpoint name in swagger (not the real endpoint)
+      name: 'UsersAuth', //endpoint name in swagger (not the real endpoint)
       description: 'Users Authentication' //endpoint description
     },
   ],
