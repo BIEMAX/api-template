@@ -41,7 +41,8 @@ const { translate } = require('./libs/library')
 app.use(express.static('public'))
 
 // Routes/endpoints (each version will be a new line)
-require('./routes/indexV1')(app)
+require('./routes/v1/index')(app)
+require('./routes/v2/index')(app)
 
 // Error no unknown routes
 app.use(function (req, res) {

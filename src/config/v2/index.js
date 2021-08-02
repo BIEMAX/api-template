@@ -48,10 +48,6 @@ module.exports = {
       name: 'Users', //endpoint name in swagger (not the real endpoint)
       description: 'Users Authentication' //endpoint description
     },
-    {
-      name: 'Tasks',
-      description: 'Tasks (to do, doing, done)'
-    },
   ],
   components: {
     securitySchemes: {
