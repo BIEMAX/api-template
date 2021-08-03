@@ -16,14 +16,14 @@ module.exports = () => {
 
   const options = {
     customSiteTitle: config.api.applicationName,
-    //customCss: '.swagger-ui .topbar { display: none }',
+    customCss: '.swagger-ui .topbar { display: none }',
     //customfavIcon: '/favicon.ico',
     explorer: true,
     filter: true,
     swaggerOptions: {
       //https://swagger.io/docs/open-source-tools/swagger-ui/usage/configuration/
       displayRequestDuration: true,
-      //filter: false,
+      filter: true,
       showExtensions: true,
       showCommonExtensions: true,
       displayOperationId: true,

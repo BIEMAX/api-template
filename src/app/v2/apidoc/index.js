@@ -23,7 +23,7 @@ module.exports = () => {
     swaggerOptions: {
       //https://swagger.io/docs/open-source-tools/swagger-ui/usage/configuration/
       displayRequestDuration: true,
-      //filter: false,
+      filter: true,
       showExtensions: true,
       showCommonExtensions: true,
       displayOperationId: true,

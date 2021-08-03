@@ -5,14 +5,20 @@ const { translate } = require('../../libs/library')
  * Contains swagger definitions (like servers, version, name, environment, routes).
  */
 module.exports = {
-  openapi: '3.0.0', //do not change
+  openapi: '3.0.3',
   info: {
     title: `${config.api.applicationName} - V2 (${config.api.environment})`,
     version: config.api.version,
     description: config.api.environment.toUpperCase(),
     termsOfService: 'https://localhost:3000/v2/users/userterms',
     contact: {
-      email: 'help@dionei.com.br'
+      name: 'API Support',
+      email: 'help@dionei.com.br',
+      url: 'https://help.api.com'
+    },
+    license: {
+      name: 'Apache 2.0',
+      url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
     }
   },
   servers: [
