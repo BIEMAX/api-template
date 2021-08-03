@@ -5,6 +5,18 @@
     "serverStartError": "API server cannot be started by:",
     "in": "in"
   },
+  "routes": {
+    "v1": {
+      "users": {
+        "title": "Users",
+        "description": "Users Authentication"
+      },
+      "tasks": {
+        "title": "Tasks",
+        "description": "Tasks (to do, doing, done)"
+      }
+    }
+  },
   "api": {
     "v1": {
       "tasks": {},

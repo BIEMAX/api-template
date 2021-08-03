@@ -5,6 +5,18 @@
     "serverStartError": "Servidor da API não pode iniciar devido ao erro:",
     "in": "em"
   },
+  "routes": {
+    "v1": {
+      "users": {
+        "title": "Users",
+        "description": "Autenticação de usuário"
+      },
+      "tasks": {
+        "title": "Tasks",
+        "description": "Tarefas (a fazer, fazendo, feito/concluído)"
+      }
+    }
+  },
   "api": {
     "v1": {
       "tasks": {},

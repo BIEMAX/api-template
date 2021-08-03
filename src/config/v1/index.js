@@ -1,5 +1,9 @@
 const config = require('../index')
+const { translate } = require('../../libs/library')
 
+/**
+ * Contains swagger definitions (like servers, version, name, environment, routes).
+ */
 module.exports = {
   openapi: '3.0.0', //do not change
   info: {
@@ -45,12 +49,12 @@ module.exports = {
   produces: ['application/json'],
   tags: [
     {
-      name: 'Users', //endpoint name in swagger (not the real endpoint)
-      description: 'Users Authentication' //endpoint description
+      name: translate('routes.v1.users.title'), //endpoint name in swagger (not the real endpoint)
+      description: translate('routes.v1.users.description') //endpoint description
     },
     {
-      name: 'Tasks',
-      description: 'Tasks (to do, doing, done)'
+      name: translate('routes.v1.tasks.title'),
+      description: translate('routes.v1.tasks.description')
     },
   ],
   components: {

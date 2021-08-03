@@ -1,4 +1,5 @@
 const config = require('../index')
+const { translate } = require('../../libs/library')
 
 /**
  * Contains swagger definitions (like servers, version, name, environment, routes).

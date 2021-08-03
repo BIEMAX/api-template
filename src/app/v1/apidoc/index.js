@@ -16,7 +16,7 @@ module.exports = () => {
 
   const options = {
     customSiteTitle: config.api.applicationName,
-    customCss: '.swagger-ui .topbar { display: none }',
+    //customCss: '.swagger-ui .topbar { display: none }',
     //customfavIcon: '/favicon.ico',
     explorer: true,
     filter: true,
