@@ -3,6 +3,8 @@
 const axios = require('axios')
 const request = require('request')
 
+const { translate } = require('./library')
+
 /**
  * @apiIgnore
  *
@@ -54,11 +56,10 @@ module.exports = (endPointUrl, method, auth, header, data, timeout = 10000, oAut
           if (err.response) {
             if (err.response.statusText != undefined && err.response.status != 429) {
               let msg = JSON.stringify(err.response.statusText) && JSON.stringify(err.response.data)
-
-              reject(msg)
               //reject(err.response.statusText)
+              reject(msg)
             } else if (err.response.status == 429) {
-              reject('Excedeu o número de requisições.')
+              reject(translate('lib.rest.limit'))
             } else {
               reject(err.response.data)
             }

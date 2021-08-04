@@ -28,14 +28,27 @@
       "allow": "canAllowNonSecureRequests is defined as true",
       "notFound": "User not found"
     },
-    "cepQuery": {
-      "nullValue": "CEP cannot be null"
-    },
     "newRelic": {
       "withoutInfo": "Without information about it"
+    },
+    "rest": {
+      "limit": "Exceeded the number of requests"
+    },
+    "soap": {
+      "empty": "Response body/data was empty and cound't resolvev"
+    },
+    "zip": {
+      "empty": "CEP cannot be null",
+      "size": "CEP have to be only 8 numbers or 9 (with hyphen)",
+      "success": "Success to get the address"
     }
   },
   "generic": {
+    "responses": {
+      "200": "Success",
+      "400": "Error",
+      "404": "Resource not found or not identified"
+    },
     "months": {
       "jan": "january",
       "fev": "february",

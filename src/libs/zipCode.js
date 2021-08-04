@@ -17,8 +17,8 @@ module.exports = async zipCode => {
       [
         // eslint-disable-next-line no-unused-vars
         (done) => {
-          if (!zipCode) return reject(translate('CEP cannot be null'))
-          else if (zipCode.trim().length < 8) reject('CEP have to be only 8 numbers or 9 (with hyphen)')
+          if (!zipCode) return reject(translate('lib.zip.empty'))
+          else if (zipCode.trim().length < 8) reject(translate('lib.zip.size'))
           else {
             const url = 'https://www.google.com.br/maps/search/' + zipCode.replace(/-/g, '') //Replace all ocurrences
 
@@ -33,7 +33,7 @@ module.exports = async zipCode => {
                 if (addressInfo) {
                   let payload = {
                     status: true,
-                    message: 'Success to get the address',
+                    message: translate('lib.zip.success'),
                     data: {
                       cep: zipCode,
                       address: addressInfo.split('-')[0].trim(),
