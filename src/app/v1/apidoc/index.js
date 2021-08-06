@@ -28,7 +28,7 @@ module.exports = () => {
       showCommonExtensions: true,
       displayOperationId: true,
       //urls: [], // list of urls
-      docExpansion: 'none',
+      docExpansion: 'list',
       apisSorter: 'alpha',
       operationsSorter: (a, b) => {
         let methodsOrder = [

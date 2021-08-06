@@ -27,7 +27,8 @@ module.exports = () => {
       showExtensions: true,
       showCommonExtensions: true,
       displayOperationId: true,
-      //urls: [], // list of urls
+      //Controls the default expansion setting for the operations and tags. It can be 'list' 
+      //(expands only the tags), 'full' (expands the tags and operations) or 'none' (expands nothing).
       docExpansion: 'none',
       apisSorter: 'alpha',
       operationsSorter: (a, b) => {
