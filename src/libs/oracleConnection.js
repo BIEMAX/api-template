@@ -1,4 +1,4 @@
-const { waterfall, config } = require('./library')
+const { waterfall, config, translate } = require('./library')
 
 const oracledb = require('oracledb')
 oracledb.outFormat = oracledb.OBJECT

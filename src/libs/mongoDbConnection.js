@@ -29,9 +29,9 @@ module.exports = (collection, parameters, initialDate = '', endDate = '') => {
           // (conn, done) => {
           // const test = require('assert');
           // Connection url
-          const url = 'mongodb://localhost:27017';
+          // const url = 'mongodb://localhost:27017'
           // Database Name
-          const dbName = 'test';
+          // const dbName = 'test'
           // Connect using MongoClient
           //MongoClient.connect(config.database.connectionString, done)
           MongoClient.connect(config.database.connectionString, done)
@@ -48,6 +48,7 @@ module.exports = (collection, parameters, initialDate = '', endDate = '') => {
                 message: '',
                 data: result
               }
+              resolve(payload)
             })
             .catch((err) => {
               done(err, conn)

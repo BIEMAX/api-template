@@ -1,4 +1,4 @@
-const { waterfall, config } = require('./library')
+const { waterfall, config, translate } = require('./library')
 
 const mysql = require('mysql')
 
@@ -14,7 +14,7 @@ module.exports = (sql, params) => {
       [
         (done) => {
           if (config.database.type.toUpperCase().trim() != 'MYSQL') {
-            done(new Error(translate('lib.conn.mysql')))
+            done(new Error(translate('lib.conn.mysql')), null)
           }
           else done(null)
         },
@@ -26,12 +26,7 @@ module.exports = (sql, params) => {
             database: config.database.name
           })
 
-          conn.connect(function (err) {
-            if (err) done(err)
-            else {
-              done(null, conn)
-            }
-          })
+          conn.connect(done)
         },
         (conn, done) => {
           //Definitions to run sql
@@ -40,9 +35,9 @@ module.exports = (sql, params) => {
           //   timeout: 40000, //40s
           //   values: params
           // }
-          conn.query(sql, params, function (err, result) {
-            if (err) done(err)
-            else {
+          conn
+            .query(sql, params)
+            .then((result) => {
               conn.release()
               let payload = {
                 status: true,
@@ -52,11 +47,14 @@ module.exports = (sql, params) => {
                 }
               }
               resolve(payload)
-            }
-          })
+            })
+            .catch((err) => {
+              done(err, conn)
+            })
         }
       ],
-      (err) => {
+      (err, conn) => {
+        if (conn) conn.release()
         reject(err)
       }
     )
