@@ -1,16 +1,24 @@
 'use strict'
 
-const { waterfall, config, translate } = require('./library')
+const { waterfall, config, translate, moment } = require('./library')
 
 const MongoClient = require('mongodb').MongoClient
 
-module.exports = () => {
+/**
+ * 
+ * @param {String} collection Table/collection name
+ * @param {Object} parameters 
+ * @param {Date} initialDate 
+ * @param {Date} endDate 
+ * @returns 
+ */
+module.exports = (collection, parameters, initialDate = '', endDate = '') => {
   return new Promise((resolve, reject) => {
     waterfall(
       [
         (done) => {
           if (config.database.type.toUpperCase().trim() != 'MONGODB') {
-            done(new Error(translate('lib.conn.mongo')))
+            done(new Error(translate('lib.conn.mongo')), null)
           }
           else done(null)
         },
@@ -29,14 +37,29 @@ module.exports = () => {
           MongoClient.connect(config.database.connectionString, done)
         },
         (conn, done) => {
-          conn.db(config.database.name)
+          //https://gist.github.com/jvadillo/3e856dd1abc4fd57cc76316c7dd0a16f
+          conn
+            .db(config.database.name)
+            .collection(collection)
+            .toArray((result) => {
+              if (conn) conn.close()
+              let payload = {
+                status: true,
+                message: '',
+                data: result
+              }
+            })
+            .catch((err) => {
+              done(err, conn)
+            })
           // {
           //   const db = client.db(dbName);
           //   client.close();
           // });
         }
       ],
-      (err) => {
+      (err, conn) => {
+        if (conn) conn.close()
         reject(err)
       }
     )
