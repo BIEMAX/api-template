@@ -25,7 +25,7 @@ module.exports = {
      */
     name: process.env.NAME,
     /**
-     * Connection string (used in Oracle)
+     * Connection string (used in Oracle and MongoDb)
      */
     connectionString: process.env.CONNECTION_STRING,
     /**

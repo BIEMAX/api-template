@@ -28,6 +28,11 @@
       "allow": "canAllowNonSecureRequests is defined as true",
       "notFound": "User not found"
     },
+    "conn": {
+      "mongo": "MongoDb is not defined as default database to connection",
+      "mysql": "MySQL is not defined as default database to connection",
+      "oracle": "Oracle is not defined as default database to connection"
+    },
     "newRelic": {
       "withoutInfo": "Without information about it"
     },

@@ -1,6 +1,6 @@
+const { waterfall, config } = require('./library')
+
 const mysql = require('mysql')
-const config = require('../config')
-const async = require('async')
 
 /**
  * Executed SQL command on MySQL databases
@@ -10,11 +10,11 @@ const async = require('async')
  */
 module.exports = (sql, params) => {
   return new Promise((resolve, reject) => {
-    async.waterfall(
+    waterfall(
       [
         (done) => {
           if (config.database.type.toUpperCase().trim() != 'MYSQL') {
-            done(new Error('MySQL is not defined as default database to connection'))
+            done(new Error(translate('lib.conn.mysql')))
           }
           else done(null)
         },

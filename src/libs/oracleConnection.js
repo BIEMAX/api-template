@@ -1,5 +1,5 @@
-const config = require('../config/index')
-const async = require('async')
+const { waterfall, config } = require('./library')
+
 const oracledb = require('oracledb')
 oracledb.outFormat = oracledb.OBJECT
 
@@ -12,11 +12,11 @@ oracledb.outFormat = oracledb.OBJECT
  */
 module.exports = (sql, params, autoCommit = false) => {
   return new Promise((resolve, reject) => {
-    async.waterfall(
+    waterfall(
       [
         (done) => {
           if (config.database.type.toUpperCase().trim() != 'ORACLE') {
-            done(new Error('Oracle is not defined as default database to connection'))
+            done(new Error(translate('lib.conn.oracle')))
           }
           else done(null)
         },
