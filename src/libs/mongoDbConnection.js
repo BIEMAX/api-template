@@ -48,6 +48,7 @@ module.exports = (collection, parameters, initialDate = '', endDate = '') => {
                 message: '',
                 data: result
               }
+              resolve(payload)
             })
             .catch((err) => {
               done(err, conn)
