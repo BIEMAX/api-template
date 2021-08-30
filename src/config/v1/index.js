@@ -62,6 +62,10 @@ module.exports = {
       name: translate('routes.v1.tasks.title'),
       description: translate('routes.v1.tasks.description')
     },
+    {
+      name: translate('routes.v1.utilities.title'),
+      description: translate('routes.v1.utilities.description')
+    }
   ],
   components: {
     securitySchemes: {
