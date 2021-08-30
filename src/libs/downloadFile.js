@@ -1,6 +1,6 @@
 'use strict'
 
-const { newRelic, waterfall } = require('./library')
+const { newRelic, waterfall, translate } = require('./library')
 
 var https = require('https')
 var fs = require('fs')
@@ -22,13 +22,13 @@ function downloadFile (url, destiny) {
               file.on('finish', () => {
                 resolve({
                   status: true,
-                  message: 'Êxito ao finalizar download do arquivo',
+                  message: translate('lib.download.success'),
                   data: []
                 })
               })
               file.on('error', err => {
                 file.close()
-                if (err.code === 'EEXIST') done('File already exists')
+                if (err.code === 'EEXIST') done(new Error(translate('lib.download.file')))
                 else fs.unlink(destiny, () => done(err.message)) // Delete temp file
               })
               response.pipe(file)
@@ -42,7 +42,7 @@ function downloadFile (url, destiny) {
           })
 
           request.on('error', err => {
-            done(err.message)
+            done(new Error(err.message))
           })
         }
       ],

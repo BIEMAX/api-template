@@ -33,6 +33,11 @@
       "mysql": "MySQL is not defined as default database to connection",
       "oracle": "Oracle is not defined as default database to connection"
     },
+    "download": {
+      "success": "Success to download the file",
+      "error": "",
+      "file": "File already exists"
+    },
     "newRelic": {
       "withoutInfo": "Without information about it"
     },
