@@ -14,6 +14,10 @@
       "tasks": {
         "title": "Tasks",
         "description": "Tasks (to do, doing, done)"
+      },
+      "utilities": {
+        "title": "Utilities",
+        "description": "Generic utilities"
       }
     }
   },
