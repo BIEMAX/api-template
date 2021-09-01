@@ -1,6 +1,6 @@
 /**
  * @swagger
- * /tasks/tasks/todo:
+ * /tasks/todo:
  *   get:
  *     summary: "Get list of all tasks that need to be done"
  *     operationId: tasksTodo
