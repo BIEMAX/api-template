@@ -4,21 +4,21 @@ const config = require('../../../config/index')
 
 module.exports = () => {
   const swaggerUi = require('swagger-ui-express')
-  const swaggerJsDocumentation = require('swagger-jsdoc')
-  const swaggerDefinitions = require('../../../config/v2/index')
+  const swaggerJSDoc = require('swagger-jsdoc')
+  const apiJsonV2 = require('../../../config/v2/index')
 
-  const swaggerOptions = {
-    definition: swaggerDefinitions,
-    apis: swaggerDefinitions.apis
-  }
+  //Generate JSDoc from custom json
+  const swaggerDocumentsSpecification = swaggerJSDoc({
+    apis: apiJsonV2.apis,
+    definition: apiJsonV2
+  })
 
-  const swaggerSpecification = swaggerJsDocumentation(swaggerOptions)
-
-  const options = {
+  const customOptions = {
     customSiteTitle: config.api.applicationName,
     customCss: '.swagger-ui .topbar { display: none }',
     //customfavIcon: '/favicon.ico',
-    explorer: true,
+    swaggerUrl: apiJsonV2,
+    explorer: false,
     filter: true,
     swaggerOptions: {
       //https://swagger.io/docs/open-source-tools/swagger-ui/usage/configuration/
@@ -27,9 +27,7 @@ module.exports = () => {
       showExtensions: true,
       showCommonExtensions: true,
       displayOperationId: true,
-      //Controls the default expansion setting for the operations and tags. It can be 'list' 
-      //(expands only the tags), 'full' (expands the tags and operations) or 'none' (expands nothing).
-      docExpansion: 'none',
+      docExpansion: 'none', //Define if the documentation already start expanded || //Controls the default expansion setting for the operations and tags. It can be 'list' (expands only the tags), 'full' (expands the tags and operations) or 'none' (expands nothing).
       apisSorter: 'alpha',
       operationsSorter: (a, b) => {
         let methodsOrder = [
@@ -54,9 +52,8 @@ module.exports = () => {
     }
   }
 
-  // router.use('/', swaggerUi.serve)
-  // router.get('/', swaggerUi.setup(swaggerSpecification, options))
-  router.use('/', swaggerUi.serveFiles(swaggerSpecification), swaggerUi.setup(swaggerSpecification, options))
+  router.use('/', swaggerUi.serve)
+  router.get('/', swaggerUi.setup(swaggerDocumentsSpecification, {}, customOptions))
 
   return router
 }

@@ -21,6 +21,8 @@ module.exports = {
       url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
     }
   },
+  //host: 'localhost:3001',
+  //basePath: '/v2',
   servers: [
     {
       url: '/v2',
@@ -43,6 +45,24 @@ module.exports = {
       description: 'Development'
     }
   ],
+  tags: [
+    {
+      name: 'UsersAuth', //endpoint name in swagger (not the real endpoint)
+      description: 'Users Authentication' //endpoint description
+    },
+    {
+      name: translate('routes.v2.users.title'), //endpoint name in swagger (not the real endpoint)
+      description: translate('routes.v2.users.description') //endpoint description
+    },
+    {
+      name: translate('routes.v2.tasks.title'),
+      description: translate('routes.v2.tasks.description')
+    },
+    {
+      name: translate('routes.v2.utilities.title'),
+      description: translate('routes.v2.utilities.description')
+    }
+  ],
   schemes: [
     'https',
     'http'
@@ -53,12 +73,6 @@ module.exports = {
   ],
   consumes: ['application/json'],
   produces: ['application/json'],
-  tags: [
-    {
-      name: 'UsersAuth', //endpoint name in swagger (not the real endpoint)
-      description: 'Users Authentication' //endpoint description
-    },
-  ],
   components: {
     securitySchemes: {
       Apikey: {

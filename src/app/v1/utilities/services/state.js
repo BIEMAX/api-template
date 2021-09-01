@@ -40,7 +40,7 @@ module.exports = (req, res, next) => {
       (done) => {
         return res.status(200).json({
           status: true,
-          message: 'API Online'
+          message: 'API V1 is Online'
         })
       },
       (err) => {
