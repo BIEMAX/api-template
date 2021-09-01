@@ -21,6 +21,8 @@ module.exports = {
       url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
     }
   },
+  //host: 'localhost:3001',
+  //basePath: '/v1',
   servers: [
     {
       url: '/v1',
@@ -43,16 +45,6 @@ module.exports = {
       description: 'Development'
     }
   ],
-  schemes: [
-    'https',
-    'http'
-  ],
-  apis: [
-    'src/app/v1/**/*.js',
-    // 'src/**/*.yml' //Schemas directory
-  ],
-  consumes: ['application/json'],
-  produces: ['application/json'],
   tags: [
     {
       name: translate('routes.v1.users.title'), //endpoint name in swagger (not the real endpoint)
@@ -67,6 +59,16 @@ module.exports = {
       description: translate('routes.v1.utilities.description')
     }
   ],
+  schemes: [
+    'https',
+    'http'
+  ],
+  apis: [
+    'src/app/v1/**/*.js',
+    // 'src/**/*.yml' //Schemas directory
+  ],
+  consumes: ['application/json'],
+  produces: ['application/json'],
   components: {
     securitySchemes: {
       Apikey: {
