@@ -12,4 +12,5 @@ module.exports = (app) => {
 
   app.use('/v2/users', require('../../app/v2/users')(app))
   //app.use('/v1/tasks', require('../../app/v2/tasks')(app))
+  app.use('/v2/utilities', require('../../app/v2/utilities')(app))
 }
