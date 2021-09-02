@@ -1,0 +1,21 @@
+components:
+  responses:
+    response200:
+      description: "Success to get the data"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: "teste"
+                type: boolean
+                example: true
+              message:
+                description: "teste 2"
+                type: string
+                example: "Success to get data"
+              data:
+                description: ""
+                type: object
+                example: "[]"

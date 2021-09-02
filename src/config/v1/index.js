@@ -65,7 +65,8 @@ module.exports = {
   ],
   apis: [
     'src/app/v1/**/*.js',
-    // 'src/**/*.yml' //Schemas directory
+    'src/schemas/**/*.yaml', //Schemas directory 
+    'src/schemas/**/*.yml'
   ],
   consumes: ['application/json'],
   produces: ['application/json'],

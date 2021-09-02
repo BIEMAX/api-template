@@ -10,24 +10,15 @@
  *      - Utilities
  *     responses:
  *       200:
- *         description: "Card requested"
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   description: "teste"
- *                   type: boolean
- *                 message:
- *                   description: "teste 2"
- *                   type: string
+ *         $ref: '#/components/responses/response200'
  *       400:
- *         description: "Invalid parameters"
+ *         $ref: '#/components/responses/response400'
  *       401:
- *         description: "Not authorized"
+ *         $ref: '#/components/responses/response401'
+ *       403:
+ *         $ref: '#/components/responses/response403'
  *       404:
- *         description: "Register doesn't exist"
+ *         $ref: '#/components/responses/response404'
  */
 'use strict'
 
