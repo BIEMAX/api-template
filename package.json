@@ -46,6 +46,6 @@
     "nodemon": "^2.0.12"
   },
   "nodemonConfig": {
-    "ext": "js,mjs,json,sql"
+    "ext": "js,mjs,json,sql,yml"
   }
 }
