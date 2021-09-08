@@ -27,7 +27,6 @@ module.exports = () => {
       showExtensions: true,
       showCommonExtensions: true,
       displayOperationId: true,
-      //urls: [], // list of urls
       docExpansion: 'none', //Define if the documentation already start expanded || //Controls the default expansion setting for the operations and tags. It can be 'list' (expands only the tags), 'full' (expands the tags and operations) or 'none' (expands nothing).
       apisSorter: 'alpha',
       operationsSorter: (a, b) => {
@@ -53,7 +52,8 @@ module.exports = () => {
   }
 
   router.use('/', swaggerUi.serveFiles(swaggerDocumentsSpecification))
-  router.get('/', swaggerUi.setup(swaggerDocumentsSpecification, {}, customOptions))
+  router.get('/', swaggerUi.setup(swaggerDocumentsSpecification, customOptions, null, null, null, null, config.api.applicationName))
+  //router.get('/', swaggerUi.setup(swaggerDocumentsSpecification, customOptions))
 
   return router
 }

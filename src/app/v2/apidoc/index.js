@@ -53,7 +53,7 @@ module.exports = () => {
   }
 
   router.use('/', swaggerUi.serve)
-  router.get('/', swaggerUi.setup(swaggerDocumentsSpecification, {}, customOptions))
+  router.get('/', swaggerUi.setup(swaggerDocumentsSpecification, customOptions, null, null, null, null, config.api.applicationName))
 
   return router
 }
