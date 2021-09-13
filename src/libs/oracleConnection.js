@@ -4,13 +4,41 @@ const oracledb = require('oracledb')
 oracledb.outFormat = oracledb.OBJECT
 
 /**
- * Executed SQL command on Oracle databases
- * @param {*} sql String containing sql to execute
- * @param {*} params Array with parameters to use in query ([param1, param2, param3])
- * @param {*} autoCommit True to execute commit after insert, update, delete command.
- * @returns Object
+ * Return an object that contains connection to database, that can be
+ * re-used (you need to close the connection after operations).
+ * @example 
+ * //Below has an example how to use the object
+ * conn
+ * .execute('your sql', [param1: '', param2: 2], { autoCommit: true })
+ * .then((result) => { })
+ * .catch((err) => { })
  */
-module.exports = (sql, params, autoCommit = false) => {
+function conn () {
+  if (config.database.type.toUpperCase().trim() != 'ORACLE') {
+    throw new Error(translate('lib.conn.oracle'))
+  }
+  else {
+    let connectionConfig = {
+      user: config.database.user,
+      password: config.database.password,
+      connectString: config.database.connectionString
+    }
+    oracledb.getConnection(connectionConfig, (err, conn) => {
+      if (err) throw new Error(err)
+      else return conn
+    })
+  }
+}
+
+/**
+ * Executed SQL command on Oracle databases and closes connection
+ * after done.
+ * @param {String} sql String containing sql to execute
+ * @param {Object} params Array with parameters to use in query ([param1, param2, param3])
+ * @param {Boolean} autoCommit True to execute commit after insert, update, delete command.
+ * @returns Object with data
+ */
+function executeSql (sql, params, autoCommit = false) {
   return new Promise((resolve, reject) => {
     waterfall(
       [
@@ -54,3 +82,9 @@ module.exports = (sql, params, autoCommit = false) => {
     )
   })
 }
+/**
+ * Contains the following functions:
+ * -conn
+ * -executeSql
+ */
+module.exports = { conn, executeSql }
