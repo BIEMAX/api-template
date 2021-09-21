@@ -86,5 +86,12 @@ module.exports = {
       apiKey: '',
 
     }
+  },
+  /**
+   * SendGrid - Email delivery service
+   */
+  sendgrid: {
+    apiKey: '',
+    apiUrl: 'https://api.sendgrid.com/v3/'
   }
 }
