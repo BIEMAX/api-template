@@ -93,5 +93,22 @@ module.exports = {
   sendgrid: {
     apiKey: '',
     apiUrl: 'https://api.sendgrid.com/v3/'
+  },
+  /**
+   * Azure - Cloud Services
+   */
+  azure: {
+    /**
+     * Database name
+     */
+    database: '',
+    cosmos: {
+      /**
+       *  The service endpoint to use to create the client.
+       */
+      endpoint: '',
+      /** The account master or readonly key */
+      key: '',
+    }
   }
 }
