@@ -19,19 +19,19 @@ module.exports = (ddd, phone) => {
   //DDD need to be three chars
   ddd = ddd.length > 3 ? ddd.substring(0, 3) : ddd
 
-  //Formata o DDD para o padrão
+  //Format area code (supports only '051' DDD)
   if (ddd == undefined || ddd == null || new String(ddd).trim() == '') tempDdd = '051'
   else if (ddd == '51') tempDdd = '051'
   else if (ddd == '051') tempDdd = ddd
   else if (ddd != '51' || ddd != '051') tempDdd = '051'
 
-  //Remove o DDD caso esteja no telefone
+  //Remove DDD from phone number
   phone = phone.startsWith('051') ? phone.replace('051', '') : phone
   phone = phone.startsWith('51') ? phone.replace('51', '') : phone
 
-  //Formata o telefone
+  //Format phone number
   if (phone == undefined || phone == null || new String(phone).trim() == '') tempPhone = ''
-  else if (phone.startsWith('3') && phone.length == 8) tempPhone = phone //Telefone residencial
+  else if (phone.startsWith('3') && phone.length == 8) tempPhone = phone //Home phone
   else if ((phone.startsWith('8') || phone.startsWith('9')) && phone.length == 8) tempPhone = `9${phone}` //Se faltar o dígito 9, insere
   else tempPhone = phone //Telefone está correto após as validações e remoções de caracteres especiais
 
