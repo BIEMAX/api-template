@@ -1,14 +1,14 @@
 const { waterfall, config, translate } = require('../libs/library')
 
 const CosmosClient = require('@azure/cosmos').CosmosClient
-const client = new CosmosClient(config.azure.cosmos)
+const client = new CosmosClient(config.azure.cosmos).client.database()
 const database = client.database(config.azure.database)
 
 /**
- * Executa uma consulta para inserção de um novo registro no cosmos db
- * @param {String} container Nome do container no cosmos db
- * @param {Object} body Parâmetros que serão inseridos no cosmos db
- * @returns {Boolean} True em caso de êxito, reject em caso de erro.
+ * Insert a new register inside Azure CosmosDB
+ * @param {String} container Container name
+ * @param {Object} body Json object (body) with parameters to insert in database
+ * @returns {Boolean} True if success, false otherwise
  */
 module.exports.insertCosmosdb = (container, body) => {
   return new Promise((resolve, reject) => {
@@ -16,18 +16,19 @@ module.exports.insertCosmosdb = (container, body) => {
       [
         async () => {
           try {
-            let container = database.container(container)
-            let saveAzure = await container.items.create(body)
+            let cosmosContainer = database.container(container)
+            let saveAzure = await cosmosContainer.items.create(body)
             if (saveAzure.statusCode == '201') {
-              //TODO: Implement translation for messages.
               resolve({
                 status: true,
-                mensagem: 'Sucesso ao salvar no cosmos db',
-                idCosmos: saveAzure.item.id
+                message: translate('lib.azure.success'),
+                data: {
+                  cosmosId: saveAzure.item.id
+                }
               })
-            } else reject('Não foi possível inserir o registro no cosmosdb', saveAzure)
-          } catch (e) {
-            reject(e)
+            } else reject(translate('lib.azure.error'), saveAzure)
+          } catch (err) {
+            reject(err)
           }
         }
       ],

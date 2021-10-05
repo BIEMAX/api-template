@@ -32,6 +32,10 @@
       "allow": "canAllowNonSecureRequests is defined as true",
       "notFound": "User not found"
     },
+    "azure": {
+      "success": "Success to save",
+      "error": "Not was possible to insert a register in CosmosDb"
+    },
     "conn": {
       "mongo": "MongoDb is not defined as default database to connection",
       "mysql": "MySQL is not defined as default database to connection",
