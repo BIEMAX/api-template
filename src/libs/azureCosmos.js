@@ -32,18 +32,16 @@ module.exports.insert = (container, body) => {
           }
         }
       ],
-      (err) => {
-        reject(err)
-      }
+      (err) => { reject(err) }
     )
   })
 }
 
 /**
- * Query data in the CosmosDB
+ * Query existing data inside Azure CosmosDB
  * @param {String} container Container name
  * @param {String} query Query to run (SELECT * FROM database as d WHERE d.column = 'value')
- * @return {Object} Data from cosmosDb as object
+ * @return {Object} Data from CosmosDB as object
  */
 module.exports.query = (container, query) => {
   return new Promise((resolve, reject) => {
@@ -63,9 +61,34 @@ module.exports.query = (container, query) => {
           }
         }
       ],
-      (err) => {
-        reject(err)
-      }
+      (err) => { reject(err) }
+    )
+  })
+}
+
+/**
+ * Update existing data in CosmosDB
+ * @param {String} container Container name
+ * @param {String} cosmosId CosmosDB unique id 
+ * @param {String} primaryKey Primary key of container (defined during creation)
+ * @param {Object} body Json object (body) with parameters to update
+ * @returns {Boolean} True if success, false otherwise
+ */
+module.exports.update = (container, cosmosId, primaryKey, body) => {
+  return new Promise((resolve, reject) => {
+    waterfall(
+      [
+        async () => {
+          try {
+            let cosmosContainer = database.container(container)
+            let data = await cosmosContainer.item(cosmosId, primaryKey).replace(body)
+            resolve(data)
+          } catch (err) {
+            reject(err)
+          }
+        }
+      ],
+      (err) => { reject(err) }
     )
   })
 }
