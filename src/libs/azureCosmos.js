@@ -1,4 +1,4 @@
-const { waterfall, config, translate } = require('../libs/library')
+const { waterfall, config, translate } = require('./library')
 
 const CosmosClient = require('@azure/cosmos').CosmosClient
 const client = new CosmosClient(config.azure.cosmos).client.database()
@@ -89,6 +89,37 @@ module.exports.update = (container, cosmosId, primaryKey, body) => {
         }
       ],
       (err) => { reject(err) }
+    )
+  })
+}
+
+/**
+ * Método responsável por deletar registro do cosmos db.
+ * @param {String} cosmosContainer Nome do container no cosmos db
+ * @param {String} idCosmos Id do documento no CosmosDb
+ * @param {String} nomeArquivo Nome do arquivo em hash MD5
+ * @returns {Boolean} True em caso de êxito, exceção em caso de erro.
+ */
+module.exports.deleteCosmosdb = (cosmosContainer, idCosmos, nomeArquivo) => {
+  return new Promise((resolve, reject) => {
+    waterfall(
+      [
+        (done) => {
+          done(null)
+        },
+        async (done) => {
+          try {
+            let container = database.container(cosmosContainer)
+            let deleted = await container.item(idCosmos, nomeArquivo).delete()
+            resolve(deleted)
+          } catch (e) {
+            done(e)
+          }
+        }
+      ],
+      (err) => {
+        reject(err)
+      }
     )
   })
 }
