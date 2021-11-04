@@ -83,9 +83,7 @@ module.exports.update = (container, cosmosId, primaryKey, body) => {
             let cosmosContainer = database.container(container)
             let data = await cosmosContainer.item(cosmosId, primaryKey).replace(body)
             resolve(data)
-          } catch (err) {
-            reject(err)
-          }
+          } catch (err) { reject(err) }
         }
       ],
       (err) => { reject(err) }
@@ -94,32 +92,25 @@ module.exports.update = (container, cosmosId, primaryKey, body) => {
 }
 
 /**
- * Método responsável por deletar registro do cosmos db.
- * @param {String} cosmosContainer Nome do container no cosmos db
- * @param {String} idCosmos Id do documento no CosmosDb
- * @param {String} nomeArquivo Nome do arquivo em hash MD5
- * @returns {Boolean} True em caso de êxito, exceção em caso de erro.
+ * Delete existing data in CosmosDB
+ * @param {String} container Container name
+ * @param {String} cosmosId CosmosDB unique id
+ * @param {String} primaryKey Primary key of container (defined during creation)
+ * @returns {Boolean} True if success, false otherwise
  */
-module.exports.deleteCosmosdb = (cosmosContainer, idCosmos, nomeArquivo) => {
+module.exports.delete = (container, cosmosId, primaryKey) => {
   return new Promise((resolve, reject) => {
     waterfall(
       [
-        (done) => {
-          done(null)
-        },
-        async (done) => {
+        async () => {
           try {
-            let container = database.container(cosmosContainer)
-            let deleted = await container.item(idCosmos, nomeArquivo).delete()
+            let cosmosContainer = database.container(container)
+            let deleted = await cosmosContainer.item(cosmosId, primaryKey).delete()
             resolve(deleted)
-          } catch (e) {
-            done(e)
-          }
+          } catch (err) { reject(err) }
         }
       ],
-      (err) => {
-        reject(err)
-      }
+      (err) => { reject(err) }
     )
   })
 }

@@ -15,10 +15,6 @@
   "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
   "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
   "typescript.format.placeOpenBraceOnNewLineForFunctions": false,
-  "vetur.format.scriptInitialIndent": true,
-  "vetur.format.defaultFormatter.html": "none",
-  "vetur.format.defaultFormatter.stylus": "none",
-  "vetur.format.enable": false,
   "eslint.alwaysShowStatus": true,
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
