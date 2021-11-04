@@ -11,18 +11,18 @@ const { BlobServiceClient } = require('@azure/storage-blob')
 const blobServiceClient = BlobServiceClient.fromConnectionString(config.azure.storage.connectionString)
 
 /**
- * Método para baixar um documento da Azure Storage com base no nome do arquivo.
- * @param {String} nomeArquivo Nome do arquivo (precisa ser idêntico ao que já está na azure).
- * @param {String} extensaoArquivo Extensão do arquivo (padrão definido como 'pdf').
- * @param {String} container Container que será responsável por buscar o arquivo.
+ * Download a file from azure storage based on file name.
+ * @param {String} nomeArquivo File name (identical on Azure Storage)
+ * @param {String} extensaoArquivo File extension
+ * @param {String} container Azure container
  * @returns {Object} 
  * {
- *   status: true or false,
- *   mensagem: "Mensagem com informações adicionais"
+ *   status: true in case of success, false instead.
+ *   mensagem: "Message with success or error"
  *   data: Object
  * }
  */
-module.exports.downloadFile = (nomeArquivo, extensaoArquivo = 'pdf', container = 'laudos') => {
+module.exports.downloadFile = (nomeArquivo, extensaoArquivo = 'pdf', container = 'laudos', returnAsBase64 = true) => {
   return new Promise((resolve, reject) => {
     waterfall(
       [
@@ -32,25 +32,20 @@ module.exports.downloadFile = (nomeArquivo, extensaoArquivo = 'pdf', container =
         async (done) => {
           let containerClient = blobServiceClient.getContainerClient(container)
           let blobName = `${nomeArquivo}.${extensaoArquivo}`
-
-          //Seleciona o blob no storage
-          let blockBlobClient = containerClient.getBlockBlobClient(blobName)
-          //Verifica se o blob existe
-          let blobExist = await blockBlobClient.exists()
+          let blockBlobClient = containerClient.getBlockBlobClient(blobName) //Select blobb in storage
+          let blobExist = await blockBlobClient.exists() //Check if blob exist
 
           if (blobExist) {
-            //Busca as informações do blob
-            let downloadBlockBlobResponse = await blockBlobClient.download(0)
+            let downloadBlockBlobResponse = await blockBlobClient.download(0) //Get blob information
             if (downloadBlockBlobResponse._response.status == 200) {
-              //Traz o base64 do blob
-              //let resBase64 = await streamToString(downloadBlockBlobResponse.readableStreamBody)
-              let resBase64 = await streamToBuffer(downloadBlockBlobResponse.readableStreamBody)
-              let payload = {
+              let file = returnAsBase64 ?
+                await streamToBuffer(downloadBlockBlobResponse.readableStreamBody) :
+                await streamToString(downloadBlockBlobResponse.readableStreamBody) //Get base64 in string cryptographed
+              resolve({
                 status: true,
-                motivo_critica: '',
-                data: Buffer.from(resBase64).toString()
-              }
-              resolve(payload)
+                message: '',
+                data: Buffer.from(file).toString()
+              })
             } else {
               done(new Error(`Resposta da azure não foi de sucesso: '${downloadBlockBlobResponse._response.status}'`))
             }
@@ -109,7 +104,7 @@ module.exports.uploadFiles = (arquivos, container = 'laudos', substituirArquivo 
                 //Salva o arquivo no Storage
                 let options = {
                   blobHTTPHeaders: {
-                    blobContentType: arquivo.tipoArquivo ? tipoArquivo(arquivo.extensaoArquivo) : 'application/pdf'
+                    blobContentType: arquivo.tipoArquivo ? getMimeType(arquivo.extensaoArquivo) : 'application/pdf'
                   }
                 }
                 let buffer = Buffer.from(arquivo.base64, 'base64')
@@ -235,7 +230,6 @@ module.exports.convertBlobToBase64 = (blobStream) => {
  * @param {Object} readableStream
  * @returns {String} String contendo o conteúdo do stream.
  */
-// eslint-disable-next-line no-unused-vars
 async function streamToString (readableStream) {
   return new Promise((resolve, reject) => {
     const chunks = []
@@ -274,17 +268,73 @@ async function streamToBuffer (readableStream) {
  * @returns {String} String contendo o Mime Type do arquivo
  * @example 'application/pdf'
  */
-function tipoArquivo (extension) {
-  switch (new String(extension).trim().toUpperCase()) {
-    case 'JPG': return 'image/jpg'
-    case 'PNG': return 'image/png'
-    case 'DOC': return 'application/msword'
-    case 'DOCX': return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    case 'PDF': return 'application/pdf'
-    case 'ODT': return 'application/vnd.oasis.opendocument.text' //apache open libre office writer
-    case 'ODS': return 'application/vnd.oasis.opendocument.spreadsheet' //apache open libre office calc
-    case 'ODP': return 'application/vnd.oasis.opendocument.presentation' //apache open libre office impress
-    case 'JPEG': return 'image/jpeg'
+function getMimeType (extension) {
+  switch (new String(extension).trim().toLowerCase().replace('.', '')) {
+    case 'aac': return 'audio/aac'
+    case 'abw': return 'application/x-abiword'
+    case 'arc': return 'application/octet-stream'
+    case 'avi': return 'video/x-msvideo'
+    case 'azw': return 'application/vndcase.amazoncase.ebook'
+    case 'bin': return 'application/octet-stream'
+    case 'bz': return 'application/x-bzip'
+    case 'bz2': return 'application/x-bzip2'
+    case 'csh': return 'application/x-csh'
+    case 'css': return 'text/css'
+    case 'csv': return 'text/csv'
+    case 'doc': return 'application/msword'
+    case 'docx': return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    case 'eot': return 'application/vndcase.ms-fontobject'
+    case 'epub': return 'application/epub+zip'
+    case 'gif': return 'image/gif'
+    case 'htm': return 'text/html'
+    case 'html': return 'text/html'
+    case 'ico': return 'image/x-icon'
+    case 'ics': return 'text/calendar'
+    case 'jar': return 'application/java-archive'
+    case 'jpeg': return 'image/jpeg'
+    case 'jpg': return 'image/jpeg'
+    case 'js': return 'application/javascript'
+    case 'json': return 'application/json'
+    case 'mid': return 'audio/midi'
+    case 'midi': return 'audio/midi'
+    case 'mpeg': return 'video/mpeg'
+    case 'mpkg': return 'application/vndcase.applecase.installer+xml'
+    case 'odp': return 'application/vndcase.oasiscase.opendocumentcase.presentation' //apache open libre office impress
+    case 'ods': return 'application/vndcase.oasiscase.opendocumentcase.spreadsheet' //apache open libre office calc
+    case 'odt': return 'application/vndcase.oasiscase.opendocumentcase.text' //apache open libre office writer
+    case 'oga': return 'audio/ogg'
+    case 'ogv': return 'video/ogg'
+    case 'ogx': return 'application/ogg'
+    case 'otf': return 'font/otf'
+    case 'png': return 'image/png'
+    case 'pdf': return 'application/pdf'
+    case 'ppt': return 'application/vndcase.ms-powerpoint'
+    case 'rar': return 'application/x-rar-compressed'
+    case 'rtf': return 'application/rtf'
+    case 'sh': return 'application/x-sh'
+    case 'svg': return 'image/svg+xml'
+    case 'swf': return 'application/x-shockwave-flash'
+    case 'tar': return 'application/x-tar'
+    case 'tif': return 'image/tiff'
+    case 'tiff': return 'image/tiff'
+    case 'ts': return 'application/typescript'
+    case 'ttf': return 'font/ttf'
+    case 'vsd': return 'application/vndcase.visio'
+    case 'wav': return 'audio/x-wav'
+    case 'weba': return 'audio/webm'
+    case 'webm': return 'video/webm'
+    case 'webp': return 'image/webp'
+    case 'woff': return 'font/woff'
+    case 'woff2': return 'font/woff2'
+    case 'xhtml': return 'application/xhtml+xml'
+    case 'xls': return 'application/vndcase.ms-excel'
+    case 'xlsx': return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    case 'xml': return 'application/xml'
+    case 'xul': return 'application/vndcase.mozillacase.xul+xml'
+    case 'zip': return 'application/zip'
+    case '3gp': return 'video/3gpp'
+    case '3g2': return 'video/3gpp2'
+    case '7z': return 'application/x-7z-compressed'
     default: return ''
   }
 }
