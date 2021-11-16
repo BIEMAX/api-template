@@ -40,4 +40,5 @@
   // "editor.insertSpaces": false,
   "diffEditor.ignoreTrimWhitespace": false,
   "eslint.workingDirectories": [],
+  "totvsLanguageServer.welcomePage": false,
 }
