@@ -1,12 +1,12 @@
 {
-  "type": "service_account",
-  "project_id": "portal-empresa-hml",
-  "private_key_id": "18c86eafe889411b753375cfc0bc1878279b5a31",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCXNrMYLpsO4wYc\nMqNkN52r8RsH7VDxUlc4ENzwGyntQBL3is6qk5d3LQX26qz5Fu6qGCLObTsaPo89\nUPN9eY/oNYVI2L6Vkfheu5GzDELricA0KD7kNGKG0JzOz0zcOCXpf2PcHu6IYLoo\nEYXqh0Cz8HzeywyaSnSidI7XyKz7CrJiMa7qYl9vHqOGHW0ti0rlWODxBBPKPVq/\nUZqu4OEjFm1Gfpqm7sSFkBZBB3PikTKhfxSvvmov7hXyIqq3ggkf/c/CDogh0uJZ\n3aEGPP0oQaaoMoCxgG+B19Z6J7HnG3cZFS1jX3EFEX0iVDVDH/PXZEYVet4QhzY7\nCLwZWxWXAgMBAAECggEAN/9ALGTZ9BXbZebUviCgaZOkZHecQXmyJeeMwff1O1A+\nleAX73Avp6kLK+i0/Jti76d3gEVQHURsjBLl0KILSj1Dqfnl/gKr3P0OFCWmxI3j\nGQ2MWLsTf4RShX2cI3NBiuorg1ELGYLkfUEb/AFxUxFsVJ8SADMxZRXP7hX5BQ/b\nXP9GOZv2xpfbm6L04DJlME8ODnd0KjhOVjsqEP+z2+wQ6TYxJ+t7Dve57DGFJk4g\nUuYCgL5o6aFZSQt5dmDPmmUILwzI95NSGLAWxRHulqIec83Xh8E7VYZH21xOxftV\nS1Ey0G+K7SYIdml9vGyZgEiRgztUXJAnh0W0mcqHVQKBgQDUocDRr+uq7PljB35u\n4pN9UaU3tcfVzL36LyT1X6OHcbCHaDkMFisPjmmv24V+to1peUdryoGKhmR79cK/\n5YcSH+5qA+HbfFEw9UOuJRZmhAj0QMwtLt/E2l6WIk8m/wKqnD1Qj0j1DlnXZLFw\n9REpfzTll9D1HN3f24uLc+/WfQKBgQC2DhcTTL3kFz5BHfTdwrFTiYUr1CMNNqM4\nLc6VicjiOlCQ33/ebMRp8nFHFcDPmILHmdmQvh2IhIlwW8ETq3XrnHvI6paOp3R6\nv3IpS8vfQTa1KGW6CbXqQdstTrGMuR/hBgHOZE35fv7aHP4Ah+aSIl4IqcngF6mR\niJEMYv7UowKBgH6KTM/9W8j7Amd23D1tRcz8u9BttCF+mUi8qcgFRLKkbCQJWHni\n73lwjWEEyWthhMLSVDjH6VPhKwfCeEXvePTGYAJjkRQn5cG3FLIcjDoyNYn2zgvN\nq4nhUw0SGfzhIlsaZDr/KrH7+md/G0JX9gC2HWrNcKOOrFQ+ucsiEgeZAoGBAIXE\nUJwztQsVMP7zneoblePFlf4gPykETmWG8tXZiasAIhZwwimSTbdzFlye1S8z5lP2\n7W924YhfqgTOxk1HnLtkHWgBRmLHE8TlSmKheMkvx5zQc/6ACBR6Eyt1OOwnUg8r\nNMSL2udJssRcrR2CvZ3+do1zBAwOFuACMmGhk5B1AoGALz9xa3mNyhPZOzRNPEH7\nqcjRir56YnoMwkeNhsnivaKDg0vctVbkuPiFVUrDzMVZSvEaPJtt88B6x2JRxIz8\nw/x0/EzfUv4Z0misW6MGn9jX1Hu/9/fH04tZuVLaaE7qY8M7vniAMbduADzWax6c\nK0kfsEhHBrs+UPvosoMRROo=\n-----END PRIVATE KEY-----\n",
-  "client_email": "firebase-adminsdk-abd8v@portal-empresa-hml.iam.gserviceaccount.com",
-  "client_id": "107410020063479640647",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-abd8v%40portal-empresa-hml.iam.gserviceaccount.com"
+  "type": "",
+  "project_id": "",
+  "private_key_id": "",
+  "private_key": "",
+  "client_email": "",
+  "client_id": "",
+  "auth_uri": "",
+  "token_uri": "",
+  "auth_provider_x509_cert_url": "",
+  "client_x509_cert_url": ""
 }
