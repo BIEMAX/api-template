@@ -105,5 +105,6 @@ dist
 
 
 # Custom
-node_modules
 .env
+node_modules
+newrelic_agent.log

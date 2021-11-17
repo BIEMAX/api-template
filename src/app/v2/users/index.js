@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 module.exports = () => {
-  router.post('/cartao', require('./services/cartao'))
+  router.post('/test', require('./services/test'))
 
   return router
 }

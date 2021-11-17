@@ -1,0 +1,29 @@
+components:
+  responses:
+    response400:
+      description: "Invalid parameters or error"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: "False if occurs an error"
+                type: boolean
+                example: "false"
+              message:
+                description: "Message describing the error"
+                type: string
+                example: "connect ECONNREFUSED 127.0.0.1:3306"
+              code:
+                description: "NodeJs or library/package internal error code"
+                type: string
+                example: "5008"
+              lineError:
+                description: "Line that generate the error/exception/message"
+                type: string
+                example: "TCPConnectWrap.callbackTrampoline (internal/async_hooks.js:131:17)"
+              timestamp:
+                description: "TimeStamp that generated the error"
+                type: string
+                example: "2021-09-01 19:09:00:00-03:00"

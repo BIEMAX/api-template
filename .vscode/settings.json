@@ -1,15 +1,12 @@
 {
   "workbench.startupEditor": "newUntitledFile",
-  "noUnusedLocals": true,
   "explorer.confirmDragAndDrop": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "window.titleBarStyle": "custom",
   "editor.multiCursorModifier": "ctrlCmd",
   "explorer.confirmDelete": false,
   "breadcrumbs.enabled": false,
-  "prettier.singleQuote": true,
-  "prettier.printWidth": 150,
   "extensions.ignoreRecommendations": false,
+  "git.enableSmartCommit": true,
   "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
   "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
@@ -18,10 +15,6 @@
   "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
   "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
   "typescript.format.placeOpenBraceOnNewLineForFunctions": false,
-  "vetur.format.scriptInitialIndent": true,
-  "vetur.format.defaultFormatter.html": "none",
-  "vetur.format.defaultFormatter.stylus": "none",
-  "vetur.format.enable": false,
   "eslint.alwaysShowStatus": true,
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
@@ -34,37 +27,18 @@
     "strings": true
   },
   "editor.largeFileOptimizations": false,
+  //Identation
+  "editor.detectIndentation": false,
   "editor.tabSize": 2,
+  "editor.insertSpaces": true,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  // "editor.autoIndent": "none",
+  // "editor.insertSpaces": false,
   "diffEditor.ignoreTrimWhitespace": false,
   "eslint.workingDirectories": [],
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
-  ],
-  //Github
-  //"githubIssues.createIssueTriggers": true,
-  // "githubPullRequests.queries": [
-  //   {
-  //     "label": "Waiting For My Review",
-  //     "query": "is:open review-requested:${user}"
-  //   },
-  //   {
-  //     "label": "Assigned To Me",
-  //     "query": "is:open assignee:${user}"
-  //   },
-  //   {
-  //     "label": "Created By Me",
-  //     "query": "is:open author:${user}"
-  //   },
-  //   {
-  //     "label": "Mentioned Me",
-  //     "query": "is:open mentions:${user}"
-  //   }
-  // ],
-  "git.enableSmartCommit": true,
+  "totvsLanguageServer.welcomePage": false,
 }

@@ -1,28 +1,53 @@
 {
-  "name": "saipos-api",
-  "version": "1.0.0",
-  "description": "# Instructions",
+  "name": "api-template",
+  "version": "1.0.1",
+  "description": "API Template",
   "main": "app.js",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BIEMAX/saipos-api.git"
+    "url": "git+https://github.com/BIEMAX/api-template.git"
   },
-  "author": "",
+  "author": "Dionei Beilke Dos Santos",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BIEMAX/saipos-api/issues"
+    "url": "https://github.com/BIEMAX/api-template/issues"
   },
-  "homepage": "https://github.com/BIEMAX/saipos-api#readme",
+  "homepage": "https://github.com/BIEMAX/api-template#readme",
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "@azure/cosmos": "^3.14.1",
+    "async": "^3.2.1",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "firebase-admin": "^10.0.0",
+    "i18n": "^0.13.3",
+    "jwt-simple": "^0.5.6",
+    "moment": "^2.29.1",
+    "mongodb": "^4.1.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "newrelic": "^8.2.0",
+    "passport": "^0.4.1",
+    "passport-headerapikey": "^1.2.2",
+    "passport-jwt": "^4.0.0",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "eslint": "^7.32.0",
+    "nodemon": "^2.0.12"
+  },
+  "nodemonConfig": {
+    "ext": "js,mjs,json,sql,yml"
   }
 }
