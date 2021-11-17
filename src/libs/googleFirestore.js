@@ -35,6 +35,21 @@ let firestoreDatabase = getFirestore()
  * Get a list of documents from FireStore
  * @param {String} collectionName Name of collection in Database
  * @returns {Object} Object with the data
+ * @example
+ * // Example of querying data
+ * firebase.getCollection('planos')
+ *  .then((result) => {
+ *    console.log('result: ', result)
+ *
+ *    if (result.docs != undefined && result.docs.length > 0) {
+ *      console.log('nome: ', result.docs[0]._fieldsProto.nome.stringValue)
+ *      console.log('registro: ', result.docs[0]._fieldsProto.registro.stringValue)
+ *      console.log('status: ', result.docs[0]._fieldsProto.status.stringValue)
+ *    }
+ *  })
+ *  .catch((err) => {
+ *    console.log('error on firebase: ', err)
+ *  })
  */
 async function getDocuments (collectionName) {
   return firestoreDatabase.collection(collectionName).get()
@@ -45,6 +60,19 @@ async function getDocuments (collectionName) {
  * @param {String} collectionName Name of collection in Database
  * @param {String} id Unique ID of the document
  * @param {Object} data Object with properties and values to save in database
+ * @example
+ * // Example of adding new documents
+ * planos()
+ *   .then((result) => {
+ *     if (result.status) {
+ *       async.forEachOf(result.data, (r, key) => {
+ *         firebase.addDocument('planos', r.id, r)
+ *       })
+ *     }
+ *   })
+ *   .catch((err) => {
+ *     console.log('error on planos: ', err)
+ *   })
  */
 async function addDocument (collectionName, id, data) {
   let doc = await firestoreDatabase.collection(collectionName).doc(new String(id).trim()).set(data)
