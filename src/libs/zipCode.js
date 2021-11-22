@@ -1,9 +1,8 @@
 'use strict'
 
-const { translate } = require('./library')
+const { waterfall, translate } = require('./library')
 
 const axios = require('axios')
-const async = require('async')
 
 /**
  * Module
@@ -11,19 +10,16 @@ const async = require('async')
  * @returns {Object} Object with address
  * @example const cepQuery = require('./libs/cepQuery')('93125-430')
  */
-module.exports = async zipCode => {
+module.exports = (zipCode) => {
   return new Promise((resolve, reject) => {
-    async.waterfall(
+    waterfall(
       [
-        // eslint-disable-next-line no-unused-vars
         (done) => {
           if (!zipCode) return reject(translate('lib.zip.empty'))
           else if (zipCode.trim().length < 8) reject(translate('lib.zip.size'))
           else {
+            zipCode = !zipCode.includes('-') ? `${new String(zipCode).trim().substring(0, 5)}-${new String(zipCode).trim().substring(5, zipCode.length)}` : zipCode
             const url = 'https://www.google.com.br/maps/search/' + zipCode.replace(/-/g, '') //Replace all ocurrences
-
-            reject('dionei teste de linha')
-
             axios(url)
               .then(async response => {
                 // await new Promise(res => setTimeout(res, 5000))
@@ -53,7 +49,7 @@ module.exports = async zipCode => {
                 }
               })
               .catch(err =>
-                reject(err)
+                done(err)
               )
           }
         },
