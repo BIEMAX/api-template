@@ -37,7 +37,7 @@ let firestoreDatabase = getFirestore()
  * @returns {Object} Object with the data
  * @example
  * // Example of querying data
- * firebase.getCollection('planos')
+ * firebase.getDocuments('planos')
  *  .then((result) => {
  *    console.log('result: ', result)
  *

@@ -58,7 +58,8 @@
     "zip": {
       "empty": "CEP cannot be null",
       "size": "CEP have to be only 8 numbers or 9 (with hyphen)",
-      "success": "Success to get the address"
+      "success": "Success to get the address",
+      "notFound": "Cannot found address with zip code"
     }
   },
   "generic": {
