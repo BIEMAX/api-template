@@ -5,10 +5,10 @@ const { waterfall, translate } = require('./library')
 const axios = require('axios')
 
 /**
- * 
- * @param {String} zipCodeStart 
- * @param {String} zipCodeDestiny
- * @returns 
+ * Module that calculate the distance between two zip codes
+ * @param {String} zipCodeStart Start/initial zip code
+ * @param {String} zipCodeDestiny Final/destiny zip code
+ * @returns Object with routes
  */
 module.exports = (zipCodeStart, zipCodeDestiny) => {
   return new Promise((resolve, reject) => {
@@ -53,13 +53,19 @@ module.exports = (zipCodeStart, zipCodeDestiny) => {
                   }
                 }
                 catch (err) {
-                  console.log(`Erro on line ${x}: ${err}`)
+                  //console.log(`Erro on line ${x}: ${err}`)
                 }
-
               }
 
-
-              // if (addressInfo[indexNextRoute].split('\\"')[0] != '' && ) { //Second route
+              // if (addressInfo[0].split('\\"')[0] != '') { //First route
+              //   routes.push({
+              //     road: addressInfo[0].split('\\"')[0],
+              //     nearDistance: addressInfo[1].split('\\"')[0],
+              //     estimatedTime: addressInfo[2].split('\\"')[0],
+              //     note: html.split(',null,null,null,null,null,null,null,null,null,null,[[2,[\\"')[1].split('\\"]]]')[0]
+              //   })
+              // }
+              // if (addressInfo[indexNextRoute].split('\\"')[0] != '' && addressInfo[indexNextRoute + 1].split('\\"')[0].includes('km')) { //Second route
               //   routes.push({
               //     road: addressInfo[indexNextRoute].split('\\"')[0],
               //     nearDistance: addressInfo[indexNextRoute + 1].split('\\"')[0],
@@ -90,6 +96,7 @@ module.exports = (zipCodeStart, zipCodeDestiny) => {
               if (routes != [] && routes.length > 0) {
                 let payload = {
                   status: true,
+                  //TODO: Need implement own block in json for success and erros on this module
                   message: translate('lib.zip.success'),
                   data: {
                     startPoint: zipCodeStart,
