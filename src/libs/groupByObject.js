@@ -4,9 +4,9 @@
  * Module that group by an array by a property and return a new array
  * @param {Array} array Array of objects
  * @param {String} key Property name to group by
- * @returns 
+ * @returns
  */
-module.exports = (array, key) => {
+function groupBy (array, key) {
   return array.reduce((acc, obj) => {
     const property = obj[key]
     acc[property] = acc[property] || []
@@ -14,3 +14,5 @@ module.exports = (array, key) => {
     return acc
   })
 }
+
+module.exports = { groupBy }
