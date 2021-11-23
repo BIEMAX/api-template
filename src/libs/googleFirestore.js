@@ -11,6 +11,7 @@
  */
 
 const { config } = require('../config/environment')
+const async = require('async')
 
 // eslint-disable-next-line no-unused-vars
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app')
@@ -53,6 +54,34 @@ let firestoreDatabase = getFirestore()
  */
 async function getDocuments (collectionName) {
   return firestoreDatabase.collection(collectionName).get()
+}
+
+/**
+ * Read the properties dynamically from firestore documents and create a new array
+ * with properties and values
+ * @param {Array} array 
+ * @example
+ * // Example of creating a dynamic array
+ *  readDocumentsProperties(firestoreDocumentsArray.docs)
+ *    .then((result) => {
+ *      console.log('result: ', result)
+ *    })
+ *    .catch((err) => {
+ *      done(err)
+ *    })
+ */
+function readDocumentsProperties (array) {
+  let newArray = []
+  async.forEachOf(array, (r, key) => {
+    let properties = {}
+    for (var p in r._fieldsProto) //For each property, will check the values
+      properties[p] = r._fieldsProto[p]?.stringValue || r._fieldsProto[p]?.integerValue
+
+    newArray.push(properties)
+
+    if (key == array.length - 1)
+      return newArray
+  })
 }
 
 /**
@@ -102,4 +131,4 @@ async function deleteDocument (collectionName, id) {
   return doc
 }
 
-module.exports = { getDocuments, addDocument, updateDocument, deleteDocument }
+module.exports = { getDocuments, addDocument, updateDocument, deleteDocument, readDocumentsProperties }
