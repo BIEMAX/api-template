@@ -8,6 +8,9 @@
  * 
  * Adding data:
  * https://firebase.google.com/docs/firestore/manage-data/add-data
+ * 
+ * Possible types of values:
+ * https://cloud.google.com/firestore/docs/reference/rest/v1/Value
  */
 
 const { config } = require('../config/environment')
@@ -75,7 +78,18 @@ function readDocumentsProperties (array) {
   async.forEachOf(array, (r, key) => {
     let properties = {}
     for (var p in r._fieldsProto) //For each property, will check the values
-      properties[p] = r._fieldsProto[p]?.stringValue || r._fieldsProto[p]?.integerValue
+      properties[p] =
+        r._fieldsProto[p]?.nullValue ||
+        r._fieldsProto[p]?.booleanValue ||
+        r._fieldsProto[p]?.integerValue ||
+        r._fieldsProto[p]?.doubleValue ||
+        r._fieldsProto[p]?.timestampValue ||
+        r._fieldsProto[p]?.stringValue ||
+        r._fieldsProto[p]?.bytesValue ||
+        r._fieldsProto[p]?.referenceValue ||
+        r._fieldsProto[p]?.geoPointValue ||
+        r._fieldsProto[p]?.arrayValue ||
+        r._fieldsProto[p]?.mapValue
 
     newArray.push(properties)
 
