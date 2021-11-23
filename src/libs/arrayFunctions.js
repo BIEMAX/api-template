@@ -15,4 +15,15 @@ function groupBy (array, key) {
   })
 }
 
-module.exports = { groupBy }
+/**
+ * Module that filter data in an array
+ * @param {Array} array Array of objects
+ * @param {String} fieldName Property name to filter values
+ * @param {String} value value to use to find the occurrences
+ * @returns 
+ */
+function filterBy (array, fieldName, value) {
+  return array.filter(p => new String(p[fieldName]).trim().toUpperCase() == new String(value).trim().toUpperCase())
+}
+
+module.exports = { groupBy, filterBy }
