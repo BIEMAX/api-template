@@ -26,4 +26,14 @@ function filterBy (array, fieldName, value) {
   return array.filter(p => new String(p[fieldName]).trim().toUpperCase() == new String(value).trim().toUpperCase())
 }
 
-module.exports = { groupBy, filterBy }
+/**
+ * Module that order data inside array
+ * @param {Array} array Array of objects
+ * @param {String} fieldName Property name to order by
+ * @returns Array ordered
+ */
+function orderBy (array, fieldName) {
+  return array.sort((currentValue, nextValue) => (currentValue[fieldName] > nextValue[fieldName]) ? 1 : -1)
+}
+
+module.exports = { groupBy, filterBy, orderBy }
