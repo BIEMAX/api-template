@@ -13,7 +13,7 @@
  * https://cloud.google.com/firestore/docs/reference/rest/v1/Value
  */
 
-const { config } = require('../config/environment')
+const { config } = require('./library')
 const async = require('async')
 
 // eslint-disable-next-line no-unused-vars
@@ -21,13 +21,11 @@ const { initializeApp, applicationDefault, cert } = require('firebase-admin/app'
 // eslint-disable-next-line no-unused-vars
 const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore')
 
-const serivceAccount = config.api.environment == 'development' ? require('../config/googleHml.json') : require('../config/googleHml.json')
-
 /**
  * Initialize the connection with the server
  */
 initializeApp({
-  credential: cert(serivceAccount)
+  credential: cert(config.google.firebase[config.api.environment]) //serviceAccount
 })
 
 /**
