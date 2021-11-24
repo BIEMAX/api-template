@@ -40,7 +40,7 @@ module.exports = {
     applicationName: process.env.APINAME || 'API Template',
     version: '1.0.0',
     port: process.env.PORT || '3001',
-    environment: process.env.ENVIRONMENT || 'Development',
+    environment: process.env.ENVIRONMENT.toLowerCase() || 'development',
     /**
      * True to show swagger documentation on web.
      */
@@ -109,6 +109,55 @@ module.exports = {
       endpoint: '',
       /** The account master or readonly key */
       key: '',
+    }
+  },
+  google: {
+    /**
+     * Contains configuration to connect to firebase (that can be use for connect to realtime database, firestore
+     * and other functionalities)
+     */
+    firebase: {
+      development: {
+        'type': 'service_account',
+        'project_id': '<YOUR_PROJECT_ID>',
+        'private_key_id': '<YOUR_PRIVATE_KEY>',
+        'private_key': '<YOUR_CERTIFICATE>',
+        'client_email': '<YOUR_CLIENT_MAIL>',
+        'client_id': '<YOUR_CLIENT_ID>',
+        'auth_uri': 'https://accounts.google.com/o/oauth2/auth',
+        'token_uri': 'https://oauth2.googleapis.com/token',
+        'auth_provider_x509_cert_url': 'https://www.googleapis.com/oauth2/v1/certs',
+        'client_x509_cert_url': '<YOUR_FIREBASE_CLIENT_CERTIFICATE>'
+      },
+      stage: {
+        'type': 'service_account',
+        'project_id': '<YOUR_PROJECT_ID>',
+        'private_key_id': '<YOUR_PRIVATE_KEY>',
+        'private_key': '<YOUR_CERTIFICATE>',
+        'client_email': '<YOUR_CLIENT_MAIL>',
+        'client_id': '<YOUR_CLIENT_ID>',
+        'auth_uri': 'https://accounts.google.com/o/oauth2/auth',
+        'token_uri': 'https://oauth2.googleapis.com/token',
+        'auth_provider_x509_cert_url': 'https://www.googleapis.com/oauth2/v1/certs',
+        'client_x509_cert_url': '<YOUR_FIREBASE_CLIENT_CERTIFICATE>'
+      },
+      production: {
+        'type': 'service_account',
+        'project_id': '<YOUR_PROJECT_ID>',
+        'private_key_id': '<YOUR_PRIVATE_KEY>',
+        'private_key': '<YOUR_CERTIFICATE>',
+        'client_email': '<YOUR_CLIENT_MAIL>',
+        'client_id': '<YOUR_CLIENT_ID>',
+        'auth_uri': 'https://accounts.google.com/o/oauth2/auth',
+        'token_uri': 'https://oauth2.googleapis.com/token',
+        'auth_provider_x509_cert_url': 'https://www.googleapis.com/oauth2/v1/certs',
+        'client_x509_cert_url': '<YOUR_FIREBASE_CLIENT_CERTIFICATE>'
+      }
+    },
+    realtimeDatabase: {
+      url: {
+
+      }
     }
   }
 }
