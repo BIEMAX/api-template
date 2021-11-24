@@ -13,25 +13,19 @@
  * https://cloud.google.com/firestore/docs/reference/rest/v1/Value
  */
 
-const { config } = require('./library')
 const async = require('async')
+const { waterfall } = require('./library')
 
-// eslint-disable-next-line no-unused-vars
-const { initializeApp, applicationDefault, cert } = require('firebase-admin/app')
-// eslint-disable-next-line no-unused-vars
-const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore')
+let googleAdmin = require('./googleAdmin')
 
-/**
- * Initialize the connection with the server
- */
-initializeApp({
-  credential: cert(config.google.firebase[config.api.environment]) //serviceAccount
-})
+if (googleAdmin.admin.app.length == 0) {
+  googleAdmin.admin = require('./googleAdmin')()
+}
 
 /**
  * Contains the Google Firestore Database Object
  */
-let firestoreDatabase = getFirestore()
+let firestoreDatabase = googleAdmin.getFirestore()
 
 /**
  * Get a list of documents from FireStore
@@ -63,36 +57,44 @@ async function getDocuments (collectionName) {
  * @param {Array} array 
  * @example
  * // Example of creating a dynamic array
- *  readDocumentsProperties(firestoreDocumentsArray.docs)
- *    .then((result) => {
- *      console.log('result: ', result)
- *    })
- *    .catch((err) => {
- *      done(err)
- *    })
+ * readDocumentsProperties(firestoreDocumentsArray.docs)
+ *   .then((result) => {
+ *     console.log('result: ', result)
+ *   })
+ *   .catch((err) => {
+ *     done(err)
+ *   })
  */
 function readDocumentsProperties (array) {
-  let newArray = []
-  async.forEachOf(array, (r, key) => {
-    let properties = {}
-    for (var p in r._fieldsProto) //For each property, will check the values
-      properties[p] =
-        r._fieldsProto[p]?.nullValue ||
-        r._fieldsProto[p]?.booleanValue ||
-        r._fieldsProto[p]?.integerValue ||
-        r._fieldsProto[p]?.doubleValue ||
-        r._fieldsProto[p]?.timestampValue ||
-        r._fieldsProto[p]?.stringValue ||
-        r._fieldsProto[p]?.bytesValue ||
-        r._fieldsProto[p]?.referenceValue ||
-        r._fieldsProto[p]?.geoPointValue ||
-        r._fieldsProto[p]?.arrayValue ||
-        r._fieldsProto[p]?.mapValue
+  return new Promise((resolve, reject) => {
+    waterfall(
+      [
+        () => {
+          let newArray = []
+          async.forEachOf(array, (r, key) => {
+            let properties = {}
+            for (var p in r._fieldsProto) //For each property, will check the values
+              properties[p] =
+                r._fieldsProto[p]?.nullValue ||
+                r._fieldsProto[p]?.booleanValue ||
+                r._fieldsProto[p]?.integerValue ||
+                r._fieldsProto[p]?.doubleValue ||
+                r._fieldsProto[p]?.timestampValue ||
+                r._fieldsProto[p]?.stringValue ||
+                r._fieldsProto[p]?.bytesValue ||
+                r._fieldsProto[p]?.referenceValue ||
+                r._fieldsProto[p]?.geoPointValue ||
+                r._fieldsProto[p]?.arrayValue ||
+                r._fieldsProto[p]?.mapValue
 
-    newArray.push(properties)
+            newArray.push(properties)
 
-    if (key == array.length - 1)
-      return newArray
+            if (key == array.length - 1) resolve(newArray)
+          })
+        }
+      ],
+      (err) => { reject(err) }
+    )
   })
 }
 
