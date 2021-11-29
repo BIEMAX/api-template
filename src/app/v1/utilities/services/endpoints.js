@@ -4,7 +4,9 @@
  *   get:
  *     summary: "Get a list of available endpoints and export to a collection for postman import"
  *     operationId: getEndpointsAvailable
- *     description: "Get a list of available endpoints and export to a collection in Postman template"
+ *     description: "Get a list of available endpoints and export to a collection in Postman template, reading
+ *                  multiples versions of current API and multiple endpoints. For each tag in swagger, is created
+ *                  a folder in postman collection."
  *     tags:
  *      - utilities
  *     responses:
