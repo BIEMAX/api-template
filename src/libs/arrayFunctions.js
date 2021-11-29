@@ -1,7 +1,7 @@
 'use strict'
 
 /**
- * Module that group by an array by a property and return a new array
+ * Function that group by an array by a property and return a new array
  * @param {Array} array Array of objects
  * @param {String} key Property name to group by
  * @returns
@@ -16,7 +16,7 @@ function groupBy (array, key) {
 }
 
 /**
- * Module that filter data in an array
+ * Function that filter data in an array
  * @param {Array} array Array of objects
  * @param {String} fieldName Property name to filter values
  * @param {String} value value to use to find the occurrences
@@ -27,7 +27,7 @@ function filterBy (array, fieldName, value) {
 }
 
 /**
- * Module that order data inside array
+ * Function that order data inside array
  * @param {Array} array Array of objects
  * @param {String} fieldName Property name to order by
  * @returns Array ordered
@@ -36,4 +36,14 @@ function orderBy (array, fieldName) {
   return array.sort((currentValue, nextValue) => (currentValue[fieldName] > nextValue[fieldName]) ? 1 : -1)
 }
 
-module.exports = { groupBy, filterBy, orderBy }
+/**
+ * Function that get the distinct values inside an array by a property name.
+ * @param {Array} array 
+ * @param {String} fieldName 
+ * @returns 
+ */
+function distinct (array, fieldName) {
+  return [...new Set(array.map(p => p[fieldName]))]
+}
+
+module.exports = { groupBy, filterBy, orderBy, distinct }
