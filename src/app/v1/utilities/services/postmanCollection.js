@@ -1,14 +1,14 @@
 /**
  * @swagger
- * /utilities/endpoints:
+ * /utilities/postman/collection:
  *   get:
  *     summary: "Get a list of available endpoints and export to a collection for postman import"
- *     operationId: getEndpointsAvailable
+ *     operationId: getEndpointsCollection
  *     description: "Get a list of available endpoints and export to a collection in Postman template, reading
  *                  multiples versions of current API and multiple endpoints. For each tag in swagger, is created
  *                  a folder in postman collection."
  *     tags:
- *      - utilities
+ *      - Utilities
  *     responses:
  *       200:
  *         description: Success
