@@ -175,4 +175,17 @@ async function deleteDocument (collectionName, id) {
   return doc
 }
 
-module.exports = { getDocuments, addDocument, updateDocument, deleteDocument, readDocumentsProperties }
+/**
+ * Delete a complete collection from Google Firestore
+ * @param {String} collectionName Name of collection in Database
+ * @returns Promise
+ */
+async function deleteCollection (collectionName) {
+  const res = await firestoreDatabase.collection(collectionName)
+    .get().then(querySnapshot => {
+      querySnapshot.docs.forEach(d => { d.ref.delete() })
+    })
+  return res
+}
+
+module.exports = { getDocuments, addDocument, updateDocument, deleteDocument, readDocumentsProperties, deleteCollection }
