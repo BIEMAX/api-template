@@ -65,7 +65,7 @@ async function getDocuments (collectionName) {
  *     done(err)
  *   })
  */
-function readDocumentsProperties (array) {
+async function readDocumentsProperties (array) {
   return new Promise((resolve, reject) => {
     waterfall(
       [
@@ -73,29 +73,59 @@ function readDocumentsProperties (array) {
           let newArray = []
           async.forEachOf(array, (r, key) => {
             let properties = {}
-            for (var p in r._fieldsProto) //For each property, will check the values
-              properties[p] =
-                r._fieldsProto[p]?.nullValue ||
-                r._fieldsProto[p]?.booleanValue ||
-                r._fieldsProto[p]?.integerValue ||
-                r._fieldsProto[p]?.doubleValue ||
-                r._fieldsProto[p]?.timestampValue ||
-                r._fieldsProto[p]?.stringValue ||
-                r._fieldsProto[p]?.bytesValue ||
-                r._fieldsProto[p]?.referenceValue ||
-                r._fieldsProto[p]?.geoPointValue ||
-                r._fieldsProto[p]?.arrayValue ||
-                r._fieldsProto[p]?.mapValue
 
+            for (var p in r._fieldsProto) { //For each property, will check the values
+              if (r._fieldsProto[p].valueType == 'arrayValue') {
+                let arrayValues = r._fieldsProto[p].arrayValue.values //Contain an array os objects
+
+                let subArray = [] //Contais array with all values/properties
+                for (let x = 0;x < arrayValues.length;x++) {
+                  let data = arrayValues[x].mapValue.fields //Get fields & values
+
+                  let subProperties = {} //Will contain subproperties with respective values
+                  for (var sp in data) {
+                    subProperties[sp] = readField(data[sp])
+                  }
+
+                  subArray.push(subProperties)
+                }
+                properties[p] = subArray
+              } else {
+                properties[p] =
+                  r._fieldsProto[p]?.nullValue || //Variáveis que podem conter valores
+                  r._fieldsProto[p]?.booleanValue ||
+                  r._fieldsProto[p]?.integerValue ||
+                  r._fieldsProto[p]?.doubleValue ||
+                  r._fieldsProto[p]?.timestampValue ||
+                  r._fieldsProto[p]?.stringValue ||
+                  r._fieldsProto[p]?.bytesValue ||
+                  r._fieldsProto[p]?.referenceValue ||
+                  r._fieldsProto[p]?.geoPointValue ||
+                  r._fieldsProto[p]?.mapValue
+              }
+            }
             newArray.push(properties)
-
-            if (key == array.length - 1) resolve(newArray)
+            if (key == array.length - 1)
+              resolve(newArray)
           })
         }
       ],
       (err) => { reject(err) }
     )
   })
+}
+
+function readField (fieldObject) {
+  return fieldObject?.nullValue || //Variables that can has a value
+    fieldObject?.booleanValue ||
+    fieldObject?.integerValue ||
+    fieldObject?.doubleValue ||
+    fieldObject?.timestampValue ||
+    fieldObject?.stringValue ||
+    fieldObject?.bytesValue ||
+    fieldObject?.referenceValue ||
+    fieldObject?.geoPointValue ||
+    fieldObject?.mapValue
 }
 
 /**
