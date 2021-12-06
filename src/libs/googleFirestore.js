@@ -178,6 +178,13 @@ async function deleteDocument (collectionName, id) {
 /**
  * Delete a complete collection from Google Firestore
  * @param {String} collectionName Name of collection in Database
+ * @example 
+ * const { deleteCollection } = require('./lib/googleFirebase')
+ * deleteCollection('prestadores')
+ *   .then((result) => {
+ *     console.log('return: ', result)
+ *   })
+ *   .catch((err) => { console.log('err: ', err) })
  * @returns Promise
  */
 async function deleteCollection (collectionName) {
