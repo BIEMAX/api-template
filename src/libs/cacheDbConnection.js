@@ -138,15 +138,22 @@ module.exports = (query, bindParameters = undefined) => {
  * @returns Array with columns
  */
 function getSqlColums (query) {
-  let colunasEmTexto = new String(query).trim().split('SELECT')[1].split('FROM')[0] //Get only parameters
-  let colunas = colunasEmTexto.split(',')
+  let columnsString = new String(query).trim().split('SELECT')[1].split('FROM')[0] //Get only parameters
+  let columns = columnsString.split(',')
   let data = []
 
-  for (let x = 0;x < colunas.length;x++) {
-    data.push({
-      id: x,
-      nome: colunas[x].replace(/\r\n/g, '').trim().match(/"(\w+)"/)[1]
-    })
+  for (let x = 0;x < columns.length;x++) {
+    if (columns[x].replace(/\r\n/g, '').includes('"')) { //Columns with alias
+      data.push({
+        id: x,
+        nome: columns[x].replace(/\r\n/g, '').trim().match(/"(\w+)"/)[1]
+      })
+    } else { //Columns without alias
+      data.push({
+        id: x,
+        nome: columns[x].replace(/\r\n/g, '').trim()
+      })
+    }
   }
   return data
 }
