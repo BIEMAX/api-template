@@ -1,3 +1,6 @@
+//TODO: Study the link bellow to implement capitalization in object String
+//https://metring.com.br/javascript-primeira-letra-maiuscula#:~:text=Alternativamente%20você%20pode%20fazer%20o,letra%20usando%20substr(1)%20.
+
 /**
  * 
  * @param {String} string String to capitalize (first word or every single word )
