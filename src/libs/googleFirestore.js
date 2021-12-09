@@ -74,39 +74,11 @@ async function readDocumentsProperties (array) {
           async.forEachOf(array, (r, key) => {
             let properties = {}
 
-            for (var p in r._fieldsProto) { //For each property, will check the values
-              if (r._fieldsProto[p].valueType == 'arrayValue') {
-                let arrayValues = r._fieldsProto[p].arrayValue.values //Contain an array os objects
-
-                let subArray = [] //Contais array with all values/properties
-                for (let x = 0;x < arrayValues.length;x++) {
-                  let data = arrayValues[x].mapValue.fields //Get fields & values
-
-                  let subProperties = {} //Will contain subproperties with respective values
-                  for (var sp in data) {
-                    subProperties[sp] = readField(data[sp])
-                  }
-
-                  subArray.push(subProperties)
-                }
-                properties[p] = subArray
-              } else {
-                properties[p] =
-                  r._fieldsProto[p]?.nullValue || //Variáveis que podem conter valores
-                  r._fieldsProto[p]?.booleanValue ||
-                  r._fieldsProto[p]?.integerValue ||
-                  r._fieldsProto[p]?.doubleValue ||
-                  r._fieldsProto[p]?.timestampValue ||
-                  r._fieldsProto[p]?.stringValue ||
-                  r._fieldsProto[p]?.bytesValue ||
-                  r._fieldsProto[p]?.referenceValue ||
-                  r._fieldsProto[p]?.geoPointValue ||
-                  r._fieldsProto[p]?.mapValue
-              }
+            for (var p in r._fieldsProto) {
+              properties[p] = readProperty(r._fieldsProto[p])
             }
             newArray.push(properties)
-            if (key == array.length - 1)
-              resolve(newArray)
+            if (key == array.length - 1) resolve(newArray)
           })
         }
       ],
@@ -115,6 +87,52 @@ async function readDocumentsProperties (array) {
   })
 }
 
+/**
+ * Read a field value recursively (through array fields and values)
+ * @param {Object} fieldObject Firebase field object
+ * @returns 
+ */
+function readProperty (fieldObject) {
+  let retorno = {}
+  if (fieldObject.valueType == 'arrayValue') {
+    let arrayValues = fieldObject.arrayValue.values //Contain an array os objects
+
+    let subArray = [] //Contais array with all values/properties
+    for (let x = 0;x < arrayValues.length;x++) {
+      let data = arrayValues[x].mapValue.fields //Get fields & values
+
+      let subProperties = {} //Will contain subproperties with respective values
+      for (var sp in data) {
+        if (data[sp].valueType == 'arrayValue') subProperties[sp] = readProperty(data[sp])
+        else if (data[sp].valueType == 'mapValue') subProperties[sp] = readProperty(data[sp])
+        else subProperties[sp] = readField(data[sp])
+      }
+      subArray.push(subProperties)
+    }
+    retorno = subArray
+  }
+  else if (fieldObject.valueType == 'mapValue') {
+    let arrayValues = fieldObject.mapValue.fields //Contain an array os objects
+    let subProperties = {} //Will contain subproperties with respective values
+
+    // eslint-disable-next-line no-redeclare
+    for (var sp in arrayValues) {
+      if (arrayValues[sp].valueType == 'arrayValue') subProperties[sp] = readProperty(arrayValues[sp])
+      else if (arrayValues[sp].valueType == 'mapValue') subProperties[sp] = readProperty(arrayValues[sp])
+      else subProperties[sp] = readField(arrayValues[sp])
+    }
+    retorno = subProperties
+  }
+  else retorno = readField(fieldObject) //If is a simple value, just read the field property
+
+  return retorno
+}
+
+/**
+ * Read a field value according type from Google Firebase
+ * @param {Object} fieldObject 
+ * @returns Return field value according his type
+ */
 function readField (fieldObject) {
   return fieldObject?.nullValue || //Variables that can has a value
     fieldObject?.booleanValue ||
