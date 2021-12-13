@@ -22,7 +22,9 @@ function groupBy (array, key) {
  * @param {String} value value to use to find the occurrences
  * @returns 
  */
+//TODO: Implement logic to verify in subproperties too
 function filterBy (array, fieldName, value) {
+  //if typeof p == 'object' { p[mainProperty][fieldName]  } 
   return array.filter(p => new String(p[fieldName]).trim().toUpperCase() == new String(value).trim().toUpperCase())
 }
 
