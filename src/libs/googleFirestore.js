@@ -206,11 +206,18 @@ async function deleteDocument (collectionName, id) {
  * @returns Promise
  */
 async function deleteCollection (collectionName) {
-  const res = await firestoreDatabase.collection(collectionName)
-    .get().then(querySnapshot => {
-      querySnapshot.docs.forEach(d => { d.ref.delete() })
+  firestoreDatabase.collection(collectionName)
+    .get().then((querySnapshot) => {
+      async.forEachOf(querySnapshot.docs, async (d, key) => {
+        await d.ref.delete()
+        if (key == querySnapshot.docs.length - 1) {
+          return true
+        }
+      })
     })
-  return res
+    .catch((err) => {
+      return err
+    })
 }
 
 module.exports = { getDocuments, addDocument, updateDocument, deleteDocument, readDocumentsProperties, deleteCollection }
