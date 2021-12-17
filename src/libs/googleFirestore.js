@@ -52,6 +52,18 @@ async function getDocuments (collectionName) {
 }
 
 /**
+ * Get document property by an Id
+ * @param {String} collectionName Name of collection in Database
+ * @param {String} id Unique ID of the document
+ * @returns {Object} Object with the data
+ */
+async function getDocumentsById (collectionName, id) {
+  const collectionReference = firestoreDatabase.collection(collectionName).doc(id)
+  const doc = await collectionReference.get()
+  return doc
+}
+
+/**
  * Read the properties dynamically from firestore documents and create a new array
  * with properties and values
  * @param {Array} array 
