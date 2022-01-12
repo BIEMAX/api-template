@@ -40,7 +40,7 @@ module.exports = {
     applicationName: process.env.APINAME || 'API Template',
     version: '1.0.0',
     port: process.env.PORT || '3001',
-    environment: process.env.ENVIRONMENT.toLowerCase() || 'development',
+    environment: process.env?.ENVIRONMENT != undefined ? process.env.ENVIRONMENT.toLowerCase() : 'development',
     /**
      * True to show swagger documentation on web.
      */

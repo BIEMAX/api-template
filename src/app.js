@@ -68,16 +68,28 @@ app.use(function (err, req, res, next) {
 
 })
 
-app
-  .listen(config.api.port, function () {
-    console.log('-------------------------------------------------------------------------------------------------')
-    console.log(`\u001b[${32}m${translate('init.serverStartSuccess')} ${config.api.port} ${translate('init.in')} ${Date()} \u001b[0m`)
-    console.log('-------------------------------------------------------------------------------------------------')
-  })
-  .on('error', function (error) {
-    console.log('-------------------------------------------------------------------------------------------------')
-    console.log(`\u001b[${31}m${translate('init.serverStartError')} '${error}' ${translate('init.in')} ${Date()} \u001b[0m`)
-    console.log('-------------------------------------------------------------------------------------------------')
-  })
+//Check if has an environment file
+if (!process.env.ENVIRONMENT) {
+  console.log('-------------------------------------------------------------------------------------------------')
+  console.log(`\u001b[${33}m
+    Could not identified a 'environment configuration file' on this api server.
+    Copy the file '.env.example' and renamed to '.env'. 
+    ${Date()} 
+    \u001b[0m`)
+  console.log('-------------------------------------------------------------------------------------------------')
+}
+else {
+  app
+    .listen(config.api.port, function () {
+      console.log('-------------------------------------------------------------------------------------------------')
+      console.log(`\u001b[${32}m${translate('init.serverStartSuccess')} ${config.api.port} ${translate('init.in')} ${Date()} \u001b[0m`)
+      console.log('-------------------------------------------------------------------------------------------------')
+    })
+    .on('error', function (error) {
+      console.log('-------------------------------------------------------------------------------------------------')
+      console.log(`\u001b[${31}m${translate('init.serverStartError')} '${error}' ${translate('init.in')} ${Date()} \u001b[0m`)
+      console.log('-------------------------------------------------------------------------------------------------')
+    })
+}
 
 module.exports = app
