@@ -146,16 +146,17 @@ function readProperty (fieldObject) {
  * @returns Return field value according his type
  */
 function readField (fieldObject) {
-  return fieldObject?.nullValue || //Variables that can has a value
-    fieldObject?.booleanValue ||
-    fieldObject?.integerValue ||
-    fieldObject?.doubleValue ||
-    fieldObject?.timestampValue ||
-    fieldObject?.stringValue ||
-    fieldObject?.bytesValue ||
-    fieldObject?.referenceValue ||
-    fieldObject?.geoPointValue ||
-    fieldObject?.mapValue
+  if (fieldObject?.nullValue != undefined) return fieldObject.nullValue
+  else if (fieldObject?.booleanValue != undefined) return fieldObject.nullValue
+  else if (fieldObject?.integerValue != undefined) return fieldObject.nullValue
+  else if (fieldObject?.doubleValue != undefined) return fieldObject.nullValue
+  else if (fieldObject?.timestampValue != undefined) return fieldObject.nullValue
+  else if (fieldObject?.stringValue != undefined) return fieldObject.nullValue
+  else if (fieldObject?.bytesValue != undefined) return fieldObject.nullValue
+  else if (fieldObject?.referenceValue != undefined) return fieldObject.nullValue
+  else if (fieldObject?.geoPointValue != undefined) return fieldObject.nullValue
+  else if (fieldObject?.mapValue != undefined) return fieldObject.nullValue
+  else return 'undefined'
 }
 
 /**
