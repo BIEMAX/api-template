@@ -103,4 +103,32 @@ function sendEmail (email, emailsCc, fromEmail, fromName, subject, templateId, d
   })
 }
 
+/**
+ * Função que verifica se a string 'emails' possuí ponto e vírgula, se sim, 
+ * divide em um array de e-mails (formato aceito pelo sendgrid)
+ * @param {String} emails String contendo e-mails
+ */
+function hasMoreThanOneEmail (emails) {
+  //Verifica se há mais de um e-mail dentro do parâmetro 'eMailDestino' separados por ponto e vírgula (sendgrid não aceita essa conotação).
+  if (new String(emails).includes(';') > 0) {
+    let listaEmails = []
+
+    // eslint-disable-next-line no-unused-vars
+    new String(emails).trim().split(';').map((value, key) => {
+      if (new String(value).trim() != ';' && new String(value).trim() != '') {
+        if (!new String(value).trim().includes('@')) return new Error('E-mail invalido')
+        else if (!new String(value).trim().includes('.')) return new Error('E-mail invalido')
+        //Os e-mails devem ser únicos no array de destinatários
+        else if (listaEmails.length > 0) {
+          if (listaEmails.filter(item => new String(item.email).trim().toUpperCase() == value.trim().toUpperCase()).length > 0) {
+            return new Error('Campo e-mail com enderecos repetidos')
+          } else listaEmails.push({ email: new String(value).trim() })
+        } else listaEmails.push({ email: new String(value).trim() })
+      }
+    })
+    return listaEmails
+  }
+  else return { email: new String(emails).trim() }
+}
+
 module.exports = { sendEmail }
