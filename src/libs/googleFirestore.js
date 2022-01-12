@@ -147,15 +147,15 @@ function readProperty (fieldObject) {
  */
 function readField (fieldObject) {
   if (fieldObject?.nullValue != undefined) return fieldObject.nullValue
-  else if (fieldObject?.booleanValue != undefined) return fieldObject.nullValue
-  else if (fieldObject?.integerValue != undefined) return fieldObject.nullValue
-  else if (fieldObject?.doubleValue != undefined) return fieldObject.nullValue
-  else if (fieldObject?.timestampValue != undefined) return fieldObject.nullValue
-  else if (fieldObject?.stringValue != undefined) return fieldObject.nullValue
-  else if (fieldObject?.bytesValue != undefined) return fieldObject.nullValue
-  else if (fieldObject?.referenceValue != undefined) return fieldObject.nullValue
-  else if (fieldObject?.geoPointValue != undefined) return fieldObject.nullValue
-  else if (fieldObject?.mapValue != undefined) return fieldObject.nullValue
+  else if (fieldObject?.booleanValue != undefined) return fieldObject.booleanValue
+  else if (fieldObject?.integerValue != undefined) return fieldObject.integerValue
+  else if (fieldObject?.doubleValue != undefined) return fieldObject.doubleValue
+  else if (fieldObject?.timestampValue != undefined) return fieldObject.timestampValue
+  else if (fieldObject?.stringValue != undefined) return fieldObject.stringValue
+  else if (fieldObject?.bytesValue != undefined) return fieldObject.bytesValue
+  else if (fieldObject?.referenceValue != undefined) return fieldObject.referenceValue
+  else if (fieldObject?.geoPointValue != undefined) return fieldObject.geoPointValue
+  else if (fieldObject?.mapValue != undefined) return fieldObject.mapValue
   else return 'undefined'
 }
 
