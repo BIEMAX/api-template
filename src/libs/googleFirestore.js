@@ -13,27 +13,19 @@
  * https://cloud.google.com/firestore/docs/reference/rest/v1/Value
  */
 
-const { config } = require('../config/environment')
 const async = require('async')
+const { waterfall } = require('./library')
 
-// eslint-disable-next-line no-unused-vars
-const { initializeApp, applicationDefault, cert } = require('firebase-admin/app')
-// eslint-disable-next-line no-unused-vars
-const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore')
+let googleAdmin = require('./googleAdmin')
 
-const serivceAccount = config.api.environment == 'development' ? require('../config/googleHml.json') : require('../config/googleHml.json')
-
-/**
- * Initialize the connection with the server
- */
-initializeApp({
-  credential: cert(serivceAccount)
-})
+if (googleAdmin.admin.app.length == 0) {
+  googleAdmin.admin = require('./googleAdmin')()
+}
 
 /**
  * Contains the Google Firestore Database Object
  */
-let firestoreDatabase = getFirestore()
+let firestoreDatabase = googleAdmin.getFirestore()
 
 /**
  * Get a list of documents from FireStore
@@ -60,42 +52,111 @@ async function getDocuments (collectionName) {
 }
 
 /**
+ * Get document property by an Id
+ * @param {String} collectionName Name of collection in Database
+ * @param {String} id Unique ID of the document
+ * @returns {Object} Object with the data
+ */
+async function getDocumentsById (collectionName, id) {
+  const collectionReference = firestoreDatabase.collection(collectionName).doc(id)
+  const doc = await collectionReference.get()
+  return doc
+}
+
+/**
  * Read the properties dynamically from firestore documents and create a new array
  * with properties and values
  * @param {Array} array 
  * @example
  * // Example of creating a dynamic array
- *  readDocumentsProperties(firestoreDocumentsArray.docs)
- *    .then((result) => {
- *      console.log('result: ', result)
- *    })
- *    .catch((err) => {
- *      done(err)
- *    })
+ * readDocumentsProperties(firestoreDocumentsArray.docs)
+ *   .then((result) => {
+ *     console.log('result: ', result)
+ *   })
+ *   .catch((err) => {
+ *     done(err)
+ *   })
  */
-function readDocumentsProperties (array) {
-  let newArray = []
-  async.forEachOf(array, (r, key) => {
-    let properties = {}
-    for (var p in r._fieldsProto) //For each property, will check the values
-      properties[p] =
-        r._fieldsProto[p]?.nullValue ||
-        r._fieldsProto[p]?.booleanValue ||
-        r._fieldsProto[p]?.integerValue ||
-        r._fieldsProto[p]?.doubleValue ||
-        r._fieldsProto[p]?.timestampValue ||
-        r._fieldsProto[p]?.stringValue ||
-        r._fieldsProto[p]?.bytesValue ||
-        r._fieldsProto[p]?.referenceValue ||
-        r._fieldsProto[p]?.geoPointValue ||
-        r._fieldsProto[p]?.arrayValue ||
-        r._fieldsProto[p]?.mapValue
+async function readDocumentsProperties (array) {
+  return new Promise((resolve, reject) => {
+    waterfall(
+      [
+        () => {
+          let newArray = []
+          async.forEachOf(array, (r, key) => {
+            let properties = {}
 
-    newArray.push(properties)
-
-    if (key == array.length - 1)
-      return newArray
+            for (var p in r._fieldsProto) {
+              properties[p] = readProperty(r._fieldsProto[p])
+            }
+            newArray.push(properties)
+            if (key == array.length - 1) resolve(newArray)
+          })
+        }
+      ],
+      (err) => { reject(err) }
+    )
   })
+}
+
+/**
+ * Read a field value recursively (through array fields and values)
+ * @param {Object} fieldObject Firebase field object
+ * @returns 
+ */
+function readProperty (fieldObject) {
+  let retorno = {}
+  if (fieldObject.valueType == 'arrayValue') {
+    let arrayValues = fieldObject.arrayValue.values //Contain an array os objects
+
+    let subArray = [] //Contais array with all values/properties
+    for (let x = 0;x < arrayValues.length;x++) {
+      let data = arrayValues[x].mapValue.fields //Get fields & values
+
+      let subProperties = {} //Will contain subproperties with respective values
+      for (var sp in data) {
+        if (data[sp].valueType == 'arrayValue') subProperties[sp] = readProperty(data[sp])
+        else if (data[sp].valueType == 'mapValue') subProperties[sp] = readProperty(data[sp])
+        else subProperties[sp] = readField(data[sp])
+      }
+      subArray.push(subProperties)
+    }
+    retorno = subArray
+  }
+  else if (fieldObject.valueType == 'mapValue') {
+    let arrayValues = fieldObject.mapValue.fields //Contain an array os objects
+    let subProperties = {} //Will contain subproperties with respective values
+
+    // eslint-disable-next-line no-redeclare
+    for (var sp in arrayValues) {
+      if (arrayValues[sp].valueType == 'arrayValue') subProperties[sp] = readProperty(arrayValues[sp])
+      else if (arrayValues[sp].valueType == 'mapValue') subProperties[sp] = readProperty(arrayValues[sp])
+      else subProperties[sp] = readField(arrayValues[sp])
+    }
+    retorno = subProperties
+  }
+  else retorno = readField(fieldObject) //If is a simple value, just read the field property
+
+  return retorno
+}
+
+/**
+ * Read a field value according type from Google Firebase
+ * @param {Object} fieldObject 
+ * @returns Return field value according his type
+ */
+function readField (fieldObject) {
+  if (fieldObject?.nullValue != undefined) return fieldObject.nullValue
+  else if (fieldObject?.booleanValue != undefined) return fieldObject.booleanValue
+  else if (fieldObject?.integerValue != undefined) return fieldObject.integerValue
+  else if (fieldObject?.doubleValue != undefined) return fieldObject.doubleValue
+  else if (fieldObject?.timestampValue != undefined) return fieldObject.timestampValue
+  else if (fieldObject?.stringValue != undefined) return fieldObject.stringValue
+  else if (fieldObject?.bytesValue != undefined) return fieldObject.bytesValue
+  else if (fieldObject?.referenceValue != undefined) return fieldObject.referenceValue
+  else if (fieldObject?.geoPointValue != undefined) return fieldObject.geoPointValue
+  else if (fieldObject?.mapValue != undefined) return fieldObject.mapValue
+  else return 'undefined'
 }
 
 /**
@@ -145,4 +206,31 @@ async function deleteDocument (collectionName, id) {
   return doc
 }
 
-module.exports = { getDocuments, addDocument, updateDocument, deleteDocument, readDocumentsProperties }
+/**
+ * Delete a complete collection from Google Firestore
+ * @param {String} collectionName Name of collection in Database
+ * @example 
+ * const { deleteCollection } = require('./lib/googleFirebase')
+ * deleteCollection('prestadores')
+ *   .then((result) => {
+ *     console.log('return: ', result)
+ *   })
+ *   .catch((err) => { console.log('err: ', err) })
+ * @returns Promise
+ */
+async function deleteCollection (collectionName) {
+  firestoreDatabase.collection(collectionName)
+    .get().then((querySnapshot) => {
+      async.forEachOf(querySnapshot.docs, async (d, key) => {
+        await d.ref.delete()
+        if (key == querySnapshot.docs.length - 1) {
+          return true
+        }
+      })
+    })
+    .catch((err) => {
+      return err
+    })
+}
+
+module.exports = { getDocuments, addDocument, updateDocument, deleteDocument, readDocumentsProperties, deleteCollection }

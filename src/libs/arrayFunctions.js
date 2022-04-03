@@ -1,7 +1,7 @@
 'use strict'
 
 /**
- * Module that group by an array by a property and return a new array
+ * Function that group by an array by a property and return a new array
  * @param {Array} array Array of objects
  * @param {String} key Property name to group by
  * @returns
@@ -16,14 +16,36 @@ function groupBy (array, key) {
 }
 
 /**
- * Module that filter data in an array
+ * Function that filter data in an array
  * @param {Array} array Array of objects
  * @param {String} fieldName Property name to filter values
  * @param {String} value value to use to find the occurrences
  * @returns 
  */
+//TODO: Implement logic to verify in subproperties too
 function filterBy (array, fieldName, value) {
+  //if typeof p == 'object' { p[mainProperty][fieldName]  } 
   return array.filter(p => new String(p[fieldName]).trim().toUpperCase() == new String(value).trim().toUpperCase())
 }
 
-module.exports = { groupBy, filterBy }
+/**
+ * Function that order data inside array
+ * @param {Array} array Array of objects
+ * @param {String} fieldName Property name to order by
+ * @returns Array ordered
+ */
+function orderBy (array, fieldName) {
+  return array.sort((currentValue, nextValue) => (currentValue[fieldName] > nextValue[fieldName]) ? 1 : -1)
+}
+
+/**
+ * Function that get the distinct values inside an array by a property name.
+ * @param {Array} array 
+ * @param {String} fieldName 
+ * @returns 
+ */
+function distinct (array, fieldName) {
+  return [...new Set(array.map(p => p[fieldName]))]
+}
+
+module.exports = { groupBy, filterBy, orderBy, distinct }
